@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CLT para PJ</string>
+
+    <!-- Abertura -->
+    <string name="bemVindo">Bem Vindo!</string>
+    <string name="loading">Loading...</string>
+    <string name="versao">Versão: 1.0.1</string>
+    <string name="email">dreambruno@gmail.com</string>
+    <string name="imagemCLTxPJ">Imagem representando a dúvida entre ter um contrato CLT ou PJ</string>
+
+    <!-- Dashboard -->
+    <string name="tab_text_1">CLT</string>
+    <string name="tab_text_2">MEI</string>
+    <string name="tab_text_3">PJ</string>
+    <string name="action_settings">Configurações</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+</resources>
