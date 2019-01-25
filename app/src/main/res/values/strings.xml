@@ -13,6 +13,15 @@
     <string name="tab_text_2">MEI</string>
     <string name="tab_text_3">PJ</string>
     <string name="action_settings">Configurações</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- CLT -->
+    <string name="btMostrar">Mostrar Descontos</string>
+    <string name="btOcultar">Ocultar Descontos</string>
+
+    <string name="txSalario">Salário:</string>
+    <string name="txTransporte">Vale Transp.:</string>
+    <string name="txRefeicao">Vale Refeição:</string>
+    <string name="txAlimentacao">Vale Aliment.:</string>
+    <string name="inss">INSS</string>
 
 </resources>

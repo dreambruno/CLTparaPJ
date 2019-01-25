@@ -18,7 +18,8 @@
         </activity>
         <activity
             android:name=".telas.Dashboard"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

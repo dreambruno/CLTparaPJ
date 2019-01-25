@@ -3,13 +3,16 @@ package com.dreambrunomsn.cltparapj.utils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.dreambrunomsn.cltparapj.classes.Informacoes;
 
 public class Mascaras {
 
-    public static final int CONTABIL = 1;
-    public static final int DATA = 2;
+    public static final int SALARIO = 1;
+    public static final int DATA = 100;
 
-    public static void listener(final EditText editText, final int mascara){
+    public static void listener(final EditText editText, final int mascara, final TextView textView){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -22,10 +25,14 @@ public class Mascaras {
             @Override
             public void afterTextChanged(Editable editable) {
                 editText.removeTextChangedListener(this);
+                Informacoes informacoes = Informacoes.getInstance();
 
                 switch(mascara){
-                    case CONTABIL:
-                        editText.setText(Mascaras.contabil(editable.toString()));
+                    case SALARIO:
+                        String salario = Mascaras.contabil(editable.toString());
+                        editText.setText(salario);
+                        informacoes.setSalario(salario);
+                        textView.setText(informacoes.getInss());
                         break;
                     case DATA:
                         editText.setText(Mascaras.data());
