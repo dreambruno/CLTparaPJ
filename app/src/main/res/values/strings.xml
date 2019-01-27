@@ -17,11 +17,17 @@
     <!-- CLT -->
     <string name="btMostrar">Mostrar Descontos</string>
     <string name="btOcultar">Ocultar Descontos</string>
+    <string name="btAddDesc">Adicionar Descontos</string>
 
     <string name="txSalario">Salário:</string>
     <string name="txTransporte">Vale Transp.:</string>
     <string name="txRefeicao">Vale Refeição:</string>
     <string name="txAlimentacao">Vale Aliment.:</string>
     <string name="inss">INSS</string>
+
+
+    <string name="valorMensal">Valor Mensal</string>
+    <string name="valorDiario">Valor Diário</string>
+    <string name="valorZero">R$ 0,00</string>
 
 </resources>

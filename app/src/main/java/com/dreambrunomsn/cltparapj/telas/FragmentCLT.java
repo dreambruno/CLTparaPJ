@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.dreambrunomsn.cltparapj.R;
@@ -22,8 +23,10 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     private EditText etTransporte;
 
     private TextView tvInss;
+    private TextView tvTransporte;
 
     private Button btDescontos;
+    private Button btAddDesc;
 
     private TableLayout tbDescontos;
 
@@ -38,23 +41,29 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         informacoes = Informacoes.getInstance();
         tbDescontos = (TableLayout)view.findViewById(R.id.tbDescontos);
 
+        tvTransporte = (TextView)view.findViewById(R.id.tvTransporte);
+        tvTransporte.setText(informacoes.getTransporte());
+
         tvInss = (TextView)view.findViewById(R.id.tvInss);
         tvInss.setText(informacoes.getInss());
 
         etSalario = (EditText)view.findViewById(R.id.etSalario);
         Mascaras.listener(etSalario, Mascaras.SALARIO, tvInss);
 
+        etTransporte = (EditText)view.findViewById(R.id.etTransporte);
+        Mascaras.listener(etTransporte, Mascaras.TRANSPORTE, tvTransporte);
+
         etRefeicao = (EditText)view.findViewById(R.id.etRefeicao);
-        //Mascaras.listener(etRefeicao, Mascaras.CONTABIL, null);
+        Mascaras.listener(etRefeicao, Mascaras.REFEICAO, null);
 
         etAlimentacao = (EditText)view.findViewById(R.id.etAlimentacao);
-        //Mascaras.listener(etAlimentacao, Mascaras.CONTABIL, null);
-
-        etTransporte = (EditText)view.findViewById(R.id.etTransporte);
-        //Mascaras.listener(etTransporte, Mascaras.CONTABIL, null);
+        Mascaras.listener(etAlimentacao, Mascaras.ALIMENTACAO, null);
 
         btDescontos = (Button)view.findViewById(R.id.btDescontos);
         btDescontos.setOnClickListener(this);
+
+        btAddDesc = (Button)view.findViewById(R.id.btAddDesc);
+        btAddDesc.setOnClickListener(this);
 
 
         return view;
@@ -70,6 +79,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
                 tbDescontos.setVisibility(View.VISIBLE);
                 btDescontos.setText(R.string.btOcultar);
             }
-        }// fim botão
+        }else if(view.getId() == btAddDesc.getId()){
+            //TableRow tr = new TableRow();
+            //tbDescontos
+        }
     }
 }

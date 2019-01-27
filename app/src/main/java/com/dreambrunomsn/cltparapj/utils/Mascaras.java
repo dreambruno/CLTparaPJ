@@ -2,6 +2,7 @@ package com.dreambrunomsn.cltparapj.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -10,6 +11,9 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 public class Mascaras {
 
     public static final int SALARIO = 1;
+    public static final int TRANSPORTE = 2;
+    public static final int REFEICAO = 3;
+    public static final int ALIMENTACAO = 4;
     public static final int DATA = 100;
 
     public static void listener(final EditText editText, final int mascara, final TextView textView){
@@ -30,12 +34,25 @@ public class Mascaras {
                 switch(mascara){
                     case SALARIO:
                         String salario = Mascaras.contabil(editable.toString());
-                        editText.setText(salario);
                         informacoes.setSalario(salario);
+                        editText.setText(salario);
                         textView.setText(informacoes.getInss());
                         break;
-                    case DATA:
-                        editText.setText(Mascaras.data());
+                    case TRANSPORTE:
+                        String transporte = Mascaras.contabil(editable.toString());
+                        informacoes.setTransporte(transporte);
+                        editText.setText(transporte);
+                        textView.setText(informacoes.getTransporte());
+                        break;
+                    case REFEICAO:
+                        String refeicao = Mascaras.contabil(editable.toString());
+                        informacoes.setRefeicao(refeicao);
+                        editText.setText(refeicao);
+                        break;
+                    case ALIMENTACAO:
+                        String alimentacao = Mascaras.contabil(editable.toString());
+                        informacoes.setAlimentacao(alimentacao);
+                        editText.setText(alimentacao);
                         break;
                 }
 
@@ -48,7 +65,7 @@ public class Mascaras {
     }
 
     public static String contabil(String texto) {
-        String valor = "0" + texto.replaceAll("\\D", "");
+        String valor = texto.replaceAll("\\D", "");
         String decimal;
 
         while(valor.indexOf("0") == 0){
@@ -57,7 +74,7 @@ public class Mascaras {
 
         switch (valor.length()){
             case 0:
-                return "R$ 0,00";
+                return "";
             case 1:
                 return "R$ 0,0" + valor;
             case 2:
@@ -78,9 +95,5 @@ public class Mascaras {
 
             return "R$ " + valor + formatado + decimal;
         }
-    }
-
-    public static String data(){
-        return "28/05/2007";
     }
 }
