@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TableLayout
+            android:id="@+id/cltTabela"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -98,6 +99,24 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/outro" />
+
+                <Button
+                    android:id="@+id/btAddBeneficio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btAdicionar"
+                    android:textAllCaps="false" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -170,7 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_span="2"
-                            android:text="@string/btAddDesc"
+                            android:text="@string/btAdicionar"
                             android:textAllCaps="false"
                             android:textSize="12sp" />
                     </TableRow>

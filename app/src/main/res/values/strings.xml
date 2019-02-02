@@ -8,22 +8,30 @@
     <string name="email">dreambruno@gmail.com</string>
     <string name="imagemCLTxPJ">Imagem representando a dúvida entre ter um contrato CLT ou PJ</string>
 
+    <!-- Adicionar Beneficio -->
+    <string name="btSair">Sair</string>
+    <string name="btSalvar">Salvar</string>
+    <string name="dgTitulo">Adicionar Benefício</string>
+    <string name="txNome">Nome:</string>
+    <string name="txValor">Valor:</string>
+    <string name="txDesconto">Desconto:</string>
+
     <!-- Dashboard -->
     <string name="tab_text_1">CLT</string>
     <string name="tab_text_2">MEI</string>
-    <string name="tab_text_3">PJ</string>
     <string name="action_settings">Configurações</string>
 
     <!-- CLT -->
     <string name="btMostrar">Mostrar Descontos</string>
     <string name="btOcultar">Ocultar Descontos</string>
-    <string name="btAddDesc">Adicionar Descontos</string>
+    <string name="btAdicionar">Adicionar</string>
 
     <string name="txSalario">Salário:</string>
     <string name="txTransporte">Vale Transp.:</string>
     <string name="txRefeicao">Vale Refeição:</string>
     <string name="txAlimentacao">Vale Aliment.:</string>
-    <string name="inss">INSS</string>
+    <string name="inss">INSS:</string>
+    <string name="outro">Outro:</string>
 
 
     <string name="valorMensal">Valor Mensal</string>

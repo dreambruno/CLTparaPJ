@@ -5,6 +5,8 @@ import android.util.Log;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Informacoes {
 
@@ -15,9 +17,20 @@ public class Informacoes {
     private float alimentacao;
     private float refeicao;
 
+    private List<Beneficio> beneficios;
+
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
         this.salario = 0;
+        this.transporte = 0;
+        this.alimentacao = 0;
+        this.refeicao = 0;
+        beneficios = new ArrayList<Beneficio>();
+        /*
+        Beneficio bn = new Beneficio();
+        bn.setNome("Teste");
+        bn.setValor("R$ 15,00");
+        beneficios.add(bn);*/
     }
 
     public static Informacoes getInstance() {
@@ -27,17 +40,6 @@ public class Informacoes {
         return ourInstance;
     }
 
-    private float stringToFloat(String valor){
-        valor = valor.replaceAll("[^0-9,]", "");
-        valor = valor.replace(",", ".");
-        try {
-            return Float.parseFloat(valor);
-        }catch (Exception ex){
-            Log.e("console", "Informacoes.setSalario(): " + ex);
-            return 0;
-        }
-    }
-
     public String getInss() {
         float valor = this.salario * 0.09f;
         DecimalFormat df = new DecimalFormat("0.00");
@@ -45,15 +47,7 @@ public class Informacoes {
         return Mascaras.contabil(String.valueOf(df.format(valor)));
     }
 
-    // GETTERS AND SETTERS
-    public float getSalario() {
-        return salario;
-    }
-    public void setSalario(String salario) {
-        this.salario = this.stringToFloat(salario);
-    }
-
-    public String getTransporte() {
+    public String getDescontoTransporte() {
         float valor = this.salario * 0.06f;
         if(valor > this.transporte){
             valor = this.transporte;
@@ -61,21 +55,45 @@ public class Informacoes {
         DecimalFormat df = new DecimalFormat("0.00");
         return Mascaras.contabil(String.valueOf(df.format(valor)));
     }
+
+    public void addBeneficio(Beneficio beneficio){
+        this.beneficios.add(beneficio);
+    }
+
+
+    // GETTERS AND SETTERS
+    public float getSalario() {
+        return salario;
+    }
+    public void setSalario(String salario) {
+        this.salario = Mascaras.stringToFloat(salario);
+    }
+
+    public float getTransporte() {
+        return transporte;
+    }
     public void setTransporte(String transporte) {
-        this.transporte = this.stringToFloat(transporte) * 22;
+        this.transporte = Mascaras.stringToFloat(transporte) * 22;
     }
 
     public float getRefeicao() {
         return refeicao;
     }
     public void setRefeicao(String refeicao) {
-        this.refeicao = this.stringToFloat(refeicao);
+        this.refeicao = Mascaras.stringToFloat(refeicao);
     }
 
     public float getAlimentacao() {
         return alimentacao;
     }
     public void setAlimentacao(String alimentacao) {
-        this.alimentacao = this.stringToFloat(alimentacao);
+        this.alimentacao = Mascaras.stringToFloat(alimentacao);
+    }
+
+    public List<Beneficio> getBeneficios() {
+        return beneficios;
+    }
+    public void setBeneficios(List<Beneficio> beneficios) {
+        this.beneficios = beneficios;
     }
 }

@@ -10,6 +10,7 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 
 public class Mascaras {
 
+    public static final int CONTABIL = 0;
     public static final int SALARIO = 1;
     public static final int TRANSPORTE = 2;
     public static final int REFEICAO = 3;
@@ -32,6 +33,10 @@ public class Mascaras {
                 Informacoes informacoes = Informacoes.getInstance();
 
                 switch(mascara){
+                    case CONTABIL:
+                        String contabil = Mascaras.contabil(editable.toString());
+                        editText.setText(contabil);
+                        break;
                     case SALARIO:
                         String salario = Mascaras.contabil(editable.toString());
                         informacoes.setSalario(salario);
@@ -42,7 +47,7 @@ public class Mascaras {
                         String transporte = Mascaras.contabil(editable.toString());
                         informacoes.setTransporte(transporte);
                         editText.setText(transporte);
-                        textView.setText(informacoes.getTransporte());
+                        textView.setText(informacoes.getDescontoTransporte());
                         break;
                     case REFEICAO:
                         String refeicao = Mascaras.contabil(editable.toString());
@@ -94,6 +99,17 @@ public class Mascaras {
             } while(valor.length() > 3);
 
             return "R$ " + valor + formatado + decimal;
+        }
+    }
+
+    public static float stringToFloat(String valor){
+        valor = valor.replaceAll("[^0-9,]", "");
+        valor = valor.replace(",", ".");
+        try {
+            return Float.parseFloat(valor);
+        }catch (Exception ex){
+            Log.e("console", "Mascara.stringToFloat(): " + ex);
+            return 0;
         }
     }
 }
