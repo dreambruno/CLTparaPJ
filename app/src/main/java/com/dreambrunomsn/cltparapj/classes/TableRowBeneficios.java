@@ -1,23 +1,16 @@
 package com.dreambrunomsn.cltparapj.classes;
 
 import android.content.Context;
-import android.view.Gravity;
-import android.view.View;
+import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.dreambrunomsn.cltparapj.R;
-
-import static com.dreambrunomsn.cltparapj.R.id.bnNome;
+import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 public class TableRowBeneficios extends TableRow {
-
-    private TextView nome;
-    private EditText valor;
-    private Button editar;
 
     // CONSTRUCTORS
     public TableRowBeneficios(Context context){
@@ -31,29 +24,26 @@ public class TableRowBeneficios extends TableRow {
 
 
     private void init(Context context, Beneficio beneficio){
-        View view = inflate(context, R.layout.table_row_beneficios, this);
-        /*TableLayout.LayoutParams tableRowParams=
-                new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.WRAP_CONTENT);
-        setLayoutParams(tableRowParams);
-        setGravity(Gravity.CENTER);*/
+        this.setId(beneficio.getCod());
+
+        TextView nome = new TextView(context);
+        nome.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        nome.setPadding(0,0, 5,0);
+        String textoNome = Mascaras.primeiraMaiuscula(beneficio.getNome());
+        nome.setText(textoNome + ":");
+
+        //TextView valor = new TextView(context);
+        EditText valor = new EditText(context);
+        valor.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        valor.setText(beneficio.getValorFormatado());
+        valor.setFocusable(false);
+
+        Button editar = new Button(context);
+        editar.setText("Editar");
 
 
-        nome = (TextView)findViewById(R.id.bnNome);
-        valor = (EditText)findViewById(R.id.bnValor);
-        //editar = (Button)findViewById(R.id.bnEdit);
-
-        if(nome == null)
-            System.out.println("null");
-
-        nome.setText(beneficio.getNome());
-        valor.setText(beneficio.getValor());
-        /*
-        editar.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Click!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
+        this.addView(nome);
+        this.addView(valor);
+        //this.addView(editar);
     }
 }

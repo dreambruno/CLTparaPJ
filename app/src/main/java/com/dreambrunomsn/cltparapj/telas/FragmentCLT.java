@@ -3,7 +3,7 @@ package com.dreambrunomsn.cltparapj.telas;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
@@ -31,8 +30,6 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     private TextView tvInss;
     private TextView tvTransporte;
 
-    private Button btDescontos;
-    private Button btAddDesc;
     private Button btAddBeneficio;
 
     private TableLayout tbDescontos;
@@ -66,14 +63,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         etAlimentacao = (EditText)view.findViewById(R.id.etAlimentacao);
         Mascaras.listener(etAlimentacao, Mascaras.ALIMENTACAO, null);
 
-        btDescontos = (Button)view.findViewById(R.id.btDescontos);
-        btDescontos.setOnClickListener(this);
-
         btAddBeneficio = (Button)view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
-
-        btAddDesc = (Button)view.findViewById(R.id.btAddDesc);
-        btAddDesc.setOnClickListener(this);
 
         //this.init(view);
 
@@ -82,49 +73,42 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == btDescontos.getId()){
-            if(tbDescontos.getVisibility() == View.VISIBLE){
-                tbDescontos.setVisibility(View.GONE);
-                btDescontos.setText(R.string.btMostrar);
-            }else {
-                tbDescontos.setVisibility(View.VISIBLE);
-                btDescontos.setText(R.string.btOcultar);
-            }
-        }else if(view.getId() == btAddDesc.getId()){
-            //TableRow tr = new TableRow();
-            //tbDescontos
-        }else if(view.getId() == btAddBeneficio.getId()){
+        if(view.getId() == btAddBeneficio.getId()){
             this.addBeneficio(view);
         }
     }
 
     private void init(View view){
+        ViewGroup.LayoutParams layout = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT);
         tvTransporte.setText(informacoes.getDescontoTransporte());
         tvInss.setText(informacoes.getInss());
         // deletar as linhas
         for(int i = 0; i < informacoes.getBeneficios().size(); i++){
-            TableRow row = (TableRow)cltTabela.findViewById(informacoes.getBeneficios().get(i).getCod());
+            Beneficio beneficio = informacoes.getBeneficios().get(i);
+            TableRowBeneficios row = (TableRowBeneficios) cltTabela.findViewById(beneficio.getCod());
             cltTabela.removeView(row);
         }
         // adicionar linhas
         for (int i = 0; i < informacoes.getBeneficios().size(); i++){
-            /*TableRow linha = new TableRow(getContext());
-            linha.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-            //
-            linha.setId(informacoes.getBeneficios().get(i).getCod());
-            TextView tv = new TextView(getContext());
-            tv.setPadding(0,0,5,0);
-            tv.setTextSize(16);
-            tv.setText(informacoes.getBeneficios().get(i).getNome() + ":");
 
-            TextView tv2 = new TextView(getContext());
-            tv2.setText(informacoes.getBeneficios().get(i).getValor());
+            Beneficio beneficio = informacoes.getBeneficios().get(i);
+            if(beneficio.getValor() > 0) {
+                TableRowBeneficios linha = new TableRowBeneficios(getContext(), informacoes.getBeneficios().get(i));
+                int indice = cltTabela.indexOfChild(cltTabela.findViewById(R.id.trAdicionar));
+                cltTabela.addView(linha, indice, layout);
+            }
+            if(beneficio.getDesconto() > 0){
+                TableRow linha = new TableRow(getContext());
+                linha.setGravity(Gravity.RIGHT);
+                TextView tx1 = new TextView(getContext());
+                TextView tx2 = new TextView(getContext());
+                tx1.setText(Mascaras.primeiraMaiuscula(beneficio.getNome()) + ":");
+                tx2.setText(beneficio.getDescontoFormatado());
 
-            linha.addView(tv);
-            linha.addView(tv2);
-*/
-            TableRowBeneficios linha = new TableRowBeneficios(getContext(), informacoes.getBeneficios().get(i));
-            cltTabela.addView(linha, 4+i, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
+                linha.addView(tx1);
+                linha.addView(tx2);
+                tbDescontos.addView(linha, layout);
+            }
         }
     }
 
@@ -134,9 +118,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         ad.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                // recarregar a página.
-                init(view);
                 escondeTeclado(view);
+                init(view);
             }
         });
     }

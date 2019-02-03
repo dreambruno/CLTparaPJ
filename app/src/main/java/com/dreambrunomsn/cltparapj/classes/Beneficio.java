@@ -10,6 +10,21 @@ public class Beneficio {
     private float valor;
     private float desconto;
 
+    // CONSTRUCTOR
+    public Beneficio() {
+        this.cod = 0;
+        this.nome = "";
+        this.valor = 0;
+        this.desconto = 0;
+    }
+
+    public String getValorFormatado() {
+        return Mascaras.contabil(String.valueOf(valor));
+    }
+
+    public String getDescontoFormatado() {
+        return Mascaras.contabil(String.valueOf(desconto));
+    }
 
     // GETTERS AND SETTERS
     public int getCod(){
@@ -26,15 +41,15 @@ public class Beneficio {
         this.nome = nome;
     }
 
-    public String getValor() {
-        return Mascaras.contabil(String.valueOf(valor));
+    public float getValor() {
+        return valor;
     }
     public void setValor(String valor) {
         this.valor = Mascaras.stringToFloat(valor);
     }
 
-    public String getDesconto() {
-        return Mascaras.contabil(String.valueOf(desconto));
+    public float getDesconto() {
+        return desconto;
     }
     public void setDesconto(String desconto) {
         this.desconto = Mascaras.stringToFloat(desconto);

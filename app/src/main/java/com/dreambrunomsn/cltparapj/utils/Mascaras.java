@@ -15,7 +15,6 @@ public class Mascaras {
     public static final int TRANSPORTE = 2;
     public static final int REFEICAO = 3;
     public static final int ALIMENTACAO = 4;
-    public static final int DATA = 100;
 
     public static void listener(final EditText editText, final int mascara, final TextView textView){
         editText.addTextChangedListener(new TextWatcher() {
@@ -111,5 +110,20 @@ public class Mascaras {
             Log.e("console", "Mascara.stringToFloat(): " + ex);
             return 0;
         }
+    }
+
+    public static String primeiraMaiuscula(String texto){
+        if(texto == null || texto.length() == 0)
+            return "Outro";
+
+        String textoTratado = "";
+        String[] palavras = texto.split(" ");
+
+        for(String item : palavras){
+            String letra = String.valueOf(item.charAt(0));
+            textoTratado += item.replaceFirst(letra, letra.toUpperCase()) + " ";
+        }
+
+        return textoTratado.trim();
     }
 }
