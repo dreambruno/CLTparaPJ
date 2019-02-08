@@ -1,13 +1,10 @@
 package com.dreambrunomsn.cltparapj.classes;
 
-import android.widget.NumberPicker;
-
+import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Informacoes {
 
@@ -17,22 +14,25 @@ public class Informacoes {
     private float transporte;
     private float refeicao;
 
+    private int codigo;
+
     private HashMap<Integer, Beneficio> beneficios;
-    private OnBeneficiosChangeListener onBeneficiosChangeListener;
+    private OnBeneficioChangeListener onBeneficioChangeListener;
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
         this.salario = 0;
         this.transporte = 0;
         this.refeicao = 0;
-        beneficios = new HashMap<Integer, Beneficio>();
+        this.codigo = 0;
+        this.beneficios = new HashMap<Integer, Beneficio>();
 
         Beneficio bn = new Beneficio();
-        bn.setCod(0);
+        bn.setCod(this.getCodigo());
         bn.setNome("Vale Refeição");
         bn.setValor("R$ 0,00");
         bn.setDesconto("R$ 0,00");
-        beneficios.put(0, bn);
+        this.beneficios.put(bn.getCod(), bn);
     }
 
     public static Informacoes getInstance() {
@@ -60,26 +60,29 @@ public class Informacoes {
 
     public void addBeneficio(Beneficio beneficio){
         this.beneficios.put(beneficio.getCod(), beneficio);
-        if(onBeneficiosChangeListener != null)
-            onBeneficiosChangeListener.onBeneficiosChange();
+        if(onBeneficioChangeListener != null)
+            onBeneficioChangeListener.onBeneficioChange();
     }
 
     public void removeBeneficio(int cod){
         this.beneficios.remove(cod);
-        if(onBeneficiosChangeListener != null)
-            onBeneficiosChangeListener.onBeneficiosChange();
+        if(onBeneficioChangeListener != null)
+            onBeneficioChangeListener.onBeneficioChange();
     }
 
-    public OnBeneficiosChangeListener getOnBeneficiosChangeListener() {
-        return onBeneficiosChangeListener;
-    }
-
-    public void setOnbeneficioChangeListener(OnBeneficiosChangeListener onbeneficioChangeListener){
-        this.onBeneficiosChangeListener = onbeneficioChangeListener;
+    public void setOnbeneficioChangeListener(OnBeneficioChangeListener onbeneficioChangeListener){
+        this.onBeneficioChangeListener = onbeneficioChangeListener;
     }
 
 
     // GETTERS AND SETTERS
+    public int getCodigo(){
+        return codigo++;
+    }
+    public void setCodigo(int codigo){
+        this.codigo = codigo;
+    }
+
     public float getSalario() {
         return salario;
     }
@@ -111,9 +114,5 @@ public class Informacoes {
     }
     public void setBeneficios(HashMap<Integer, Beneficio> beneficios) {
         this.beneficios = beneficios;
-    }
-
-    public interface OnBeneficiosChangeListener {
-        void onBeneficiosChange();
     }
 }

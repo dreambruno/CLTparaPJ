@@ -42,4 +42,18 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
             tvTeste.setText(Mascaras.contabil(tvTeste.getText().toString()));
         }
     }
+
+    @Override
+    public void setUserVisibleHint(boolean visivel) {
+        super.setUserVisibleHint(visivel);
+
+        if(visivel && this.getView() != null){
+            System.out.println("Visivel");
+            this.init();
+        }
+    }
+
+    private void init(){
+        //
+    }
 }

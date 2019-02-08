@@ -1,27 +1,23 @@
 package com.dreambrunomsn.cltparapj.telas;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.classes.TableRowBeneficios;
+import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
-
-import java.util.HashMap;
 
 public class FragmentCLT extends Fragment implements View.OnClickListener{
 
@@ -67,13 +63,12 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         btAddBeneficio = (Button)view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
 
-        informacoes.setOnbeneficioChangeListener(new Informacoes.OnBeneficiosChangeListener() {
+        informacoes.setOnbeneficioChangeListener(new OnBeneficioChangeListener() {
             @Override
-            public void onBeneficiosChange() {
+            public void onBeneficioChange() {
                 init();
             }
         });
-        //this.init(view);
 
         return view;
     }
@@ -82,23 +77,13 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btAddBeneficio:
-                this.acaoBeneficio(view, null);
+                AdicionarBeneficio ad = new AdicionarBeneficio(getContext(), null);
+                ad.show();
                 break;
             case R.id.etRefeicao:
-                this.acaoBeneficio(view, informacoes.getBeneficios().get(Beneficio.REFEICAO));
+                AdicionarBeneficio ade = new AdicionarBeneficio(getContext(), informacoes.getBeneficios().get(Beneficio.REFEICAO));
+                ade.show();
                 break;
-        }
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean visivel) {
-        super.setUserVisibleHint(visivel);
-
-        if(visivel && this.getView() != null){
-            System.out.println("Visivel");
-            this.init();
-        } else{
-            System.out.println("Hide");
         }
     }
 
@@ -148,15 +133,5 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
                 tbDescontos.addView(linha, layout);
             }
         }
-    }
-
-    private void acaoBeneficio(final View view, Beneficio beneficio){
-        final AdicionarBeneficio ad = new AdicionarBeneficio(getContext(), beneficio);
-        ad.show();
-    }
-
-    private void escondeTeclado(View view){
-        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

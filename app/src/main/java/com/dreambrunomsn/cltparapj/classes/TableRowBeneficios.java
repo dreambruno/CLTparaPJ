@@ -1,7 +1,6 @@
 package com.dreambrunomsn.cltparapj.classes;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
@@ -32,7 +31,6 @@ public class TableRowBeneficios extends TableRow {
         String textoNome = Mascaras.primeiraMaiuscula(beneficio.getNome());
         nome.setText(textoNome + ":");
 
-        //TextView valor = new TextView(context);
         EditText valor = new EditText(context);
         valor.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
         valor.setText(beneficio.getValorFormatado());
@@ -43,12 +41,6 @@ public class TableRowBeneficios extends TableRow {
             public void onClick(View view) {
                 AdicionarBeneficio ad = new AdicionarBeneficio(getContext(), beneficio);
                 ad.show();
-                ad.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        // faser tela inicial reflashar
-                    }
-                });
             }
         });
 
