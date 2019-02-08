@@ -6,12 +6,12 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/dgTxTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/dgTitulo"
+        android:text="@string/dgTituloAdd"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -33,9 +33,10 @@
                 android:id="@+id/dgNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:maxLength="13" />
+                android:maxLength="13"
+                android:minEms="6" />
         </TableRow>
 
         <TableRow
@@ -52,9 +53,10 @@
                 android:id="@+id/dgValor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="1"
                 android:hint="@string/valorMensal"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="15" />
         </TableRow>
 
         <TableRow
@@ -72,32 +74,38 @@
                 android:id="@+id/dgDesconto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="1"
                 android:hint="@string/valorMensal"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="15" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/dgSair"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btSair" />
+                    android:id="@+id/dgExcluir"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btExcluir"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/dgSalvar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="@string/btSalvar" />
             </LinearLayout>
 

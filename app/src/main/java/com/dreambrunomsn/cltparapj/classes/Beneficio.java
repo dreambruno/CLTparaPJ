@@ -2,8 +2,11 @@ package com.dreambrunomsn.cltparapj.classes;
 
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
+import java.text.DecimalFormat;
+
 public class Beneficio {
 
+    public static final int REFEICAO = 0;
     private int cod;
 
     private String nome;
@@ -12,18 +15,20 @@ public class Beneficio {
 
     // CONSTRUCTOR
     public Beneficio() {
-        this.cod = 0;
+        this.cod = -1;
         this.nome = "";
         this.valor = 0;
         this.desconto = 0;
     }
 
     public String getValorFormatado() {
-        return Mascaras.contabil(String.valueOf(valor));
+        DecimalFormat df = new DecimalFormat("0.00");
+        return Mascaras.contabil(String.valueOf(df.format(valor)));
     }
 
     public String getDescontoFormatado() {
-        return Mascaras.contabil(String.valueOf(desconto));
+        DecimalFormat df = new DecimalFormat("0.00");
+        return Mascaras.contabil(String.valueOf(df.format(desconto)));
     }
 
     // GETTERS AND SETTERS

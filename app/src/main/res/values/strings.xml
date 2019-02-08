@@ -11,7 +11,9 @@
     <!-- Adicionar Beneficio -->
     <string name="btSair">Sair</string>
     <string name="btSalvar">Salvar</string>
-    <string name="dgTitulo">Adicionar Benefício</string>
+    <string name="btExcluir">Excluir</string>
+    <string name="dgTituloAdd">Adicionar Benefício</string>
+    <string name="dgTituloEdit">Editar Benefício</string>
     <string name="txNome">Nome:</string>
     <string name="txValor">Valor:</string>
     <string name="txDesconto">Desconto:</string>
@@ -29,7 +31,6 @@
     <string name="txSalario">Salário:</string>
     <string name="txTransporte">Vale Transp.:</string>
     <string name="txRefeicao">Vale Refeição:</string>
-    <string name="txAlimentacao">Vale Aliment.:</string>
     <string name="inss">INSS:</string>
     <string name="outro">Outro</string>
 

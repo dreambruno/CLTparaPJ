@@ -30,10 +30,9 @@
 
                 <EditText
                     android:id="@+id/etSalario"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:ems="10"
+                    android:layout_weight="1"
                     android:hint="@string/valorMensal"
                     android:inputType="number"
                     android:maxLength="15"
@@ -54,12 +53,12 @@
 
                 <EditText
                     android:id="@+id/etTransporte"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:ems="10"
+                    android:layout_weight="1"
                     android:hint="@string/valorDiario"
                     android:inputType="numberDecimal"
+                    android:maxLength="15"
                     android:textSize="18dp" />
 
             </TableRow>
@@ -69,66 +68,35 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="5dp"
-                    android:text="@string/txRefeicao"
-                    android:textSize="14dp" />
+                    android:paddingRight="5dp"
+                    android:text="@string/txRefeicao" />
 
                 <EditText
                     android:id="@+id/etRefeicao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/valorDiario"
-                    android:inputType="number"
-                    android:textSize="18dp" />
-
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_edit" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txAlimentacao"
-                    android:textSize="14dp" />
-
-                <EditText
-                    android:id="@+id/etAlimentacao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/valorMensal"
-                    android:inputType="numberDecimal"
-                    android:textSize="18dp" />
-
-                <ImageButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_edit" />
+                    android:inputType="number" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/trAdicionar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp">
 
                 <Button
                     android:id="@+id/btAddBeneficio"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_span="3"
+                    android:layout_span="2"
+                    android:layout_weight="1"
                     android:text="@string/btAdicionar"
                     android:textAllCaps="false" />
             </TableRow>
@@ -142,7 +110,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="6dp"
-                    android:layout_span="3">
+                    android:layout_span="2"
+                    android:layout_weight="1">
 
                     <TableRow
                         android:layout_width="match_parent"

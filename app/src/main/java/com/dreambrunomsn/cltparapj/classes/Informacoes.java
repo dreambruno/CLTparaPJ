@@ -1,11 +1,10 @@
 package com.dreambrunomsn.cltparapj.classes;
 
-import android.util.Log;
-
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Informacoes {
@@ -14,23 +13,26 @@ public class Informacoes {
 
     private float salario;
     private float transporte;
-    private float alimentacao;
     private float refeicao;
 
-    private List<Beneficio> beneficios;
+    private VariableChangeListener variableChangeListener;
+
+    //private List<Beneficio> beneficios;
+    private HashMap<Integer, Beneficio> beneficios;
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
         this.salario = 0;
         this.transporte = 0;
-        this.alimentacao = 0;
         this.refeicao = 0;
-        beneficios = new ArrayList<Beneficio>();
-        /*
+        beneficios = new HashMap<Integer, Beneficio>();
+
         Beneficio bn = new Beneficio();
-        bn.setNome("Teste");
-        bn.setValor("R$ 15,00");
-        beneficios.add(bn);*/
+        bn.setCod(0);
+        bn.setNome("Vale Refeição");
+        bn.setValor("R$ 0,00");
+        bn.setDesconto("R$ 0,00");
+        beneficios.put(0, bn);
     }
 
     public static Informacoes getInstance() {
@@ -57,7 +59,15 @@ public class Informacoes {
     }
 
     public void addBeneficio(Beneficio beneficio){
-        this.beneficios.add(beneficio);
+        this.beneficios.put(beneficio.getCod(), beneficio);
+    }
+
+    public void removeBeneficio(int cod){
+        this.beneficios.remove(cod);
+    }
+
+    public void setVariableChangeListener(VariableChangeListener variableChangeListener){
+        this.variableChangeListener = variableChangeListener;
     }
 
 
@@ -83,17 +93,15 @@ public class Informacoes {
         this.refeicao = Mascaras.stringToFloat(refeicao);
     }
 
-    public float getAlimentacao() {
-        return alimentacao;
-    }
-    public void setAlimentacao(String alimentacao) {
-        this.alimentacao = Mascaras.stringToFloat(alimentacao);
-    }
-
-    public List<Beneficio> getBeneficios() {
+    public HashMap<Integer, Beneficio> getBeneficios() {
         return beneficios;
     }
-    public void setBeneficios(List<Beneficio> beneficios) {
+    public Beneficio getBeneficios(int key){
+        if(beneficios.containsKey(key))
+            return beneficios.get(key);
+        return null;
+    }
+    public void setBeneficios(HashMap<Integer, Beneficio> beneficios) {
         this.beneficios = beneficios;
     }
 }

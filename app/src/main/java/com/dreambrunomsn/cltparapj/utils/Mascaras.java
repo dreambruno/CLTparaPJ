@@ -53,11 +53,6 @@ public class Mascaras {
                         informacoes.setRefeicao(refeicao);
                         editText.setText(refeicao);
                         break;
-                    case ALIMENTACAO:
-                        String alimentacao = Mascaras.contabil(editable.toString());
-                        informacoes.setAlimentacao(alimentacao);
-                        editText.setText(alimentacao);
-                        break;
                 }
 
                 editText.addTextChangedListener(this);
