@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -81,6 +82,13 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
                 dismiss();
                 break;
         }
+    }
+
+    @Override
+    public void dismiss() {
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+        super.dismiss();
     }
 
     public void salvar(){

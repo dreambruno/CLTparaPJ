@@ -19,7 +19,6 @@ import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.classes.TableRowBeneficios;
-import com.dreambrunomsn.cltparapj.classes.VariableChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.util.HashMap;
@@ -40,11 +39,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     private Informacoes informacoes;
 
-    public static boolean redesenhar;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_clt, container, false);
+        final View view = inflater.inflate(R.layout.fragment_clt, container, false);
 
 
         // codigo inical
@@ -70,10 +67,10 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         btAddBeneficio = (Button)view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
 
-        informacoes.setVariableChangeListener(new VariableChangeListener() {
+        informacoes.setOnbeneficioChangeListener(new Informacoes.OnBeneficiosChangeListener() {
             @Override
-            public void onVariableChangeListener(HashMap<Integer, Beneficio> beneficios) {
-                Toast.makeText(getContext(), "Mudou!!!", Toast.LENGTH_SHORT).show();
+            public void onBeneficiosChange() {
+                init();
             }
         });
         //this.init(view);
@@ -156,13 +153,6 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     private void acaoBeneficio(final View view, Beneficio beneficio){
         final AdicionarBeneficio ad = new AdicionarBeneficio(getContext(), beneficio);
         ad.show();
-        ad.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                init();
-                escondeTeclado(view);
-            }
-        });
     }
 
     private void escondeTeclado(View view){

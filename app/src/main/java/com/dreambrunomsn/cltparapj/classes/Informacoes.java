@@ -1,5 +1,7 @@
 package com.dreambrunomsn.cltparapj.classes;
 
+import android.widget.NumberPicker;
+
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.text.DecimalFormat;
@@ -15,10 +17,8 @@ public class Informacoes {
     private float transporte;
     private float refeicao;
 
-    private VariableChangeListener variableChangeListener;
-
-    //private List<Beneficio> beneficios;
     private HashMap<Integer, Beneficio> beneficios;
+    private OnBeneficiosChangeListener onBeneficiosChangeListener;
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
@@ -60,14 +60,22 @@ public class Informacoes {
 
     public void addBeneficio(Beneficio beneficio){
         this.beneficios.put(beneficio.getCod(), beneficio);
+        if(onBeneficiosChangeListener != null)
+            onBeneficiosChangeListener.onBeneficiosChange();
     }
 
     public void removeBeneficio(int cod){
         this.beneficios.remove(cod);
+        if(onBeneficiosChangeListener != null)
+            onBeneficiosChangeListener.onBeneficiosChange();
     }
 
-    public void setVariableChangeListener(VariableChangeListener variableChangeListener){
-        this.variableChangeListener = variableChangeListener;
+    public OnBeneficiosChangeListener getOnBeneficiosChangeListener() {
+        return onBeneficiosChangeListener;
+    }
+
+    public void setOnbeneficioChangeListener(OnBeneficiosChangeListener onbeneficioChangeListener){
+        this.onBeneficiosChangeListener = onbeneficioChangeListener;
     }
 
 
@@ -103,5 +111,9 @@ public class Informacoes {
     }
     public void setBeneficios(HashMap<Integer, Beneficio> beneficios) {
         this.beneficios = beneficios;
+    }
+
+    public interface OnBeneficiosChangeListener {
+        void onBeneficiosChange();
     }
 }
