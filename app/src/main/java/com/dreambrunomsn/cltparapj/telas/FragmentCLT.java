@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
-import com.dreambrunomsn.cltparapj.classes.TableRowBeneficios;
+import com.dreambrunomsn.cltparapj.classes.LinhaBeneficio;
 import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
@@ -30,8 +31,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     private Button btAddBeneficio;
 
-    private TableLayout tbDescontos;
-    private TableLayout cltTabela;
+    private LinearLayout painelDescontos;
+    private LinearLayout painelBeneficios;
 
     private Informacoes informacoes;
 
@@ -42,8 +43,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
         // codigo inical
         informacoes = Informacoes.getInstance();
-        tbDescontos = (TableLayout)view.findViewById(R.id.tbDescontos);
-        cltTabela = (TableLayout)view.findViewById(R.id.cltTabela);
+        painelDescontos = (LinearLayout)view.findViewById(R.id.painelDescontos);
+        painelBeneficios = (LinearLayout)view.findViewById(R.id.painelBeneficios);
 
         tvTransporte = (TextView)view.findViewById(R.id.tvTransporte);
 
@@ -88,49 +89,39 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     }
 
     private void init(){
-        ViewGroup.LayoutParams layout = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT);
+        ViewGroup.LayoutParams layout = new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
         tvTransporte.setText(informacoes.getDescontoTransporte());
         tvInss.setText(informacoes.getInss());
+
         // deletar as linhas
-        for(int i = 0; i < informacoes.getBeneficios().size(); i++){
-            Beneficio beneficio = informacoes.getBeneficios().get(i);
+        painelDescontos.removeAllViews();
+        painelBeneficios.removeAllViews();
 
-            try {
-                TableRowBeneficios row = (TableRowBeneficios) cltTabela.findViewById(beneficio.getCod());
-                cltTabela.removeView(row);
-            }catch (ClassCastException ex){}
-
-            try {
-                TableRow rowDesc = (TableRow) tbDescontos.findViewById(beneficio.getCod());
-                tbDescontos.removeView(rowDesc);
-            }catch (ClassCastException ex){}
-        }
         // adicionar linhas
         if(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValor() > 0){
             etRefeicao.setText(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValorFormatado());
         }
-        for (int i = 0; i < informacoes.getBeneficios().size(); i++){
 
-            final Beneficio beneficio = informacoes.getBeneficios().get(i);
+        for (Beneficio beneficio : informacoes.getBeneficios().values()){
             if(beneficio.getValor() > 0 && beneficio.getCod() != 0) {
-                TableRowBeneficios linha = new TableRowBeneficios(getContext(), informacoes.getBeneficios().get(i));
-                int indice = cltTabela.indexOfChild(cltTabela.findViewById(R.id.trAdicionar));
-                cltTabela.addView(linha, indice, layout);
+                LinhaBeneficio linha = new LinhaBeneficio(getContext(), beneficio);
+                painelBeneficios.addView(linha);
             }
             if(beneficio.getDesconto() > 0){
-                TableRow linha = new TableRow(getContext());
+                LinearLayout linha = new LinearLayout(getContext());
                 linha.setGravity(Gravity.RIGHT);
                 linha.setId(beneficio.getCod());
 
                 TextView tx1 = new TextView(getContext());
                 tx1.setText(Mascaras.primeiraMaiuscula(beneficio.getNome()) + ":");
+                tx1.setPadding(0,0,4,0);
 
                 TextView tx2 = new TextView(getContext());
                 tx2.setText(beneficio.getDescontoFormatado());
 
                 linha.addView(tx1);
                 linha.addView(tx2);
-                tbDescontos.addView(linha, layout);
+                painelDescontos.addView(linha, layout);
             }
         }
     }
