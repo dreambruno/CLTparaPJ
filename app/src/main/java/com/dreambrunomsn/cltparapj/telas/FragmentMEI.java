@@ -15,9 +15,6 @@ import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 public class FragmentMEI extends Fragment implements View.OnClickListener {
 
-    private Button popBt;
-    private EditText tvTeste;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,30 +22,18 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_mei, container, false);
 
 
-        popBt = (Button) view.findViewById(R.id.btTeste);
-        tvTeste = (EditText) view.findViewById(R.id.tvTexte);
-
-        popBt.setOnClickListener(this);
-        //tvTeste.addTextChangedListener(Mascaras.textChangeListener(tvTeste, Mascaras.CONTABIL));
-        //Mascaras.listener(tvTeste, Mascaras.CONTABIL);
-
-
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == popBt.getId()){
-            tvTeste.setText(Mascaras.contabil(tvTeste.getText().toString()));
-        }
+        //
     }
 
     @Override
     public void setUserVisibleHint(boolean visivel) {
         super.setUserVisibleHint(visivel);
-
         if(visivel && this.getView() != null){
-            System.out.println("Visivel");
             this.init();
         }
     }

@@ -16,7 +16,7 @@ public class Mascaras {
     public static final int REFEICAO = 3;
     public static final int ALIMENTACAO = 4;
 
-    public static void listener(final EditText editText, final int mascara, final TextView textView){
+    public static void listener(final EditText editText, final int mascara, final TextView textView, final TextView textViewAux){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -41,6 +41,7 @@ public class Mascaras {
                         informacoes.setSalario(salario);
                         editText.setText(salario);
                         textView.setText(informacoes.getInss());
+                        textViewAux.setText(informacoes.getIrrf());
                         break;
                     case TRANSPORTE:
                         String transporte = Mascaras.contabil(editable.toString());

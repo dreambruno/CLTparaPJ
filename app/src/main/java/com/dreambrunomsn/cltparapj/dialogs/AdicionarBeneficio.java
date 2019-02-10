@@ -1,4 +1,4 @@
-package com.dreambrunomsn.cltparapj.telas;
+package com.dreambrunomsn.cltparapj.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -48,10 +48,10 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
         nome = (EditText)findViewById(R.id.dgNome);
 
         valor = (EditText)findViewById(R.id.dgValor);
-        Mascaras.listener(valor, Mascaras.CONTABIL, null);
+        Mascaras.listener(valor, Mascaras.CONTABIL, null, null);
 
         desconto = (EditText)findViewById(R.id.dgDesconto);
-        Mascaras.listener(desconto, Mascaras.CONTABIL, null);
+        Mascaras.listener(desconto, Mascaras.CONTABIL, null, null);
 
         if(beneficio != null){
             TextView titulo = (TextView)findViewById(R.id.dgTxTitulo);

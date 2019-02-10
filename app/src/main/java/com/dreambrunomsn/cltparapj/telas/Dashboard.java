@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.dreambrunomsn.cltparapj.R;
 
 import com.dreambrunomsn.cltparapj.conectores.SectionsPagerAdapter;
@@ -34,7 +35,6 @@ public class Dashboard extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
     }
 
 

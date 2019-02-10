@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
+import android.support.design.widget.FloatingActionButton;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
@@ -17,15 +17,9 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.classes.LinhaBeneficio;
 import com.dreambrunomsn.cltparapj.classes.LinhaDesconto;
 import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
+import com.dreambrunomsn.cltparapj.dialogs.AdicionarFilhoPensao;
+import com.dreambrunomsn.cltparapj.dialogs.AdicionarBeneficio;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
 
 public class FragmentCLT extends Fragment implements View.OnClickListener{
 
@@ -34,6 +28,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     private EditText etRefeicao;
 
     private TextView tvInss;
+    private TextView tvIrrf;
     private TextView tvTransporte;
 
     private Button btAddBeneficio;
@@ -41,6 +36,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     private LinearLayout painelDescontos;
     private LinearLayout painelBeneficios;
 
+    private FloatingActionButton floatingActionButton;
     private Informacoes informacoes;
 
     @Override
@@ -56,17 +52,18 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         tvTransporte = (TextView)view.findViewById(R.id.tvTransporte);
 
         tvInss = (TextView)view.findViewById(R.id.tvInss);
+        tvIrrf = (TextView)view.findViewById(R.id.tvIrrf);
 
         etSalario = (EditText)view.findViewById(R.id.etSalario);
-        Mascaras.listener(etSalario, Mascaras.SALARIO, tvInss);
+        Mascaras.listener(etSalario, Mascaras.SALARIO, tvInss, tvIrrf);
 
         etTransporte = (EditText)view.findViewById(R.id.etTransporte);
-        Mascaras.listener(etTransporte, Mascaras.TRANSPORTE, tvTransporte);
+        Mascaras.listener(etTransporte, Mascaras.TRANSPORTE, tvTransporte, null);
 
         etRefeicao = (EditText)view.findViewById(R.id.etRefeicao);
         etRefeicao.setFocusable(false);
         etRefeicao.setOnClickListener(this);
-        Mascaras.listener(etRefeicao, Mascaras.REFEICAO, null);
+        Mascaras.listener(etRefeicao, Mascaras.REFEICAO, null, null);
 
         btAddBeneficio = (Button)view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
@@ -77,6 +74,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
                 init();
             }
         });
+
+        floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(this);
 
         this.init();
 
@@ -94,12 +94,17 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
                 AdicionarBeneficio ade = new AdicionarBeneficio(getContext(), informacoes.getBeneficios().get(Beneficio.REFEICAO));
                 ade.show();
                 break;
+            case R.id.floatingActionButton:
+                AdicionarFilhoPensao afp = new AdicionarFilhoPensao(getContext());
+                afp.show();
+                break;
         }
     }
 
     private void init(){
         tvTransporte.setText(informacoes.getDescontoTransporte());
         tvInss.setText(informacoes.getInss());
+        tvIrrf.setText(informacoes.getIrrf());
 
         // deletar as linhas
         painelDescontos.removeAllViews();
@@ -111,7 +116,6 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         }
 
         for (Beneficio beneficio : informacoes.getBeneficios()){
-
             if(beneficio.getValor() > 0 && beneficio.getCod() != 0) {
                 LinhaBeneficio linhaBeneficio = new LinhaBeneficio(getContext(), beneficio);
                 painelBeneficios.addView(linhaBeneficio);

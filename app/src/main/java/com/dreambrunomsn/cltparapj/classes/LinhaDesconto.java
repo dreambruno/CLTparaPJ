@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dreambrunomsn.cltparapj.telas.AdicionarBeneficio;
+import com.dreambrunomsn.cltparapj.dialogs.AdicionarBeneficio;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 public class LinhaDesconto extends LinearLayout{
