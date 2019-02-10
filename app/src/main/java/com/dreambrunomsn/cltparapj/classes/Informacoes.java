@@ -4,7 +4,11 @@ import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 public class Informacoes {
 
@@ -104,8 +108,25 @@ public class Informacoes {
         this.refeicao = Mascaras.stringToFloat(refeicao);
     }
 
-    public HashMap<Integer, Beneficio> getBeneficios() {
-        return beneficios;
+    public List<Beneficio> getBeneficios() {
+
+        List<Integer> keys = new ArrayList<Integer>(beneficios.keySet());
+        Collections.sort(keys, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer x, Integer y) {
+                if (x > y){
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+
+        List<Beneficio> novo = new ArrayList<Beneficio>();
+        for (Integer cod : keys) {
+            novo.add(beneficios.get(cod));
+        }
+        return novo;
     }
     public Beneficio getBeneficios(int key){
         if(beneficios.containsKey(key))

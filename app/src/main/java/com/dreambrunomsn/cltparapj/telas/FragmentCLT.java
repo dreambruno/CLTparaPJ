@@ -19,6 +19,14 @@ import com.dreambrunomsn.cltparapj.classes.LinhaDesconto;
 import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+
 public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     private EditText etSalario;
@@ -102,7 +110,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
             etRefeicao.setText(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValorFormatado());
         }
 
-        for (Beneficio beneficio : informacoes.getBeneficios().values()){
+        for (Beneficio beneficio : informacoes.getBeneficios()){
+
             if(beneficio.getValor() > 0 && beneficio.getCod() != 0) {
                 LinhaBeneficio linhaBeneficio = new LinhaBeneficio(getContext(), beneficio);
                 painelBeneficios.addView(linhaBeneficio);
