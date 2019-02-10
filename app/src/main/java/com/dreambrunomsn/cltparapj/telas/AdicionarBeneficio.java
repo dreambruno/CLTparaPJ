@@ -87,7 +87,7 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
     @Override
     public void dismiss() {
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(salvar.getWindowToken(), 0);
         super.dismiss();
     }
 

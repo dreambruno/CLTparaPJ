@@ -12,10 +12,7 @@ import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 public class LinhaBeneficio extends LinearLayout {
 
-    // CONSTRUCTORS
-    public LinhaBeneficio(Context context){
-        super(context);
-    }
+    // CONSTRUCTOR
     public LinhaBeneficio(Context context, Beneficio beneficio) {
         super(context);
         this.init(context, beneficio);
@@ -28,7 +25,7 @@ public class LinhaBeneficio extends LinearLayout {
 
         TextView nome = new TextView(context);
         nome.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        nome.setLayoutParams(new LayoutParams((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 95, getResources().getDisplayMetrics()), LayoutParams.WRAP_CONTENT));
+        nome.setLayoutParams(new LayoutParams(dpiToPixel(95), LayoutParams.WRAP_CONTENT));
         String textoNome = Mascaras.primeiraMaiuscula(beneficio.getNome());
         nome.setText(textoNome + ":");
 
@@ -47,5 +44,9 @@ public class LinhaBeneficio extends LinearLayout {
 
         this.addView(nome);
         this.addView(valor);
+    }
+
+    private int dpiToPixel(int dpi){
+        return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpi, getResources().getDisplayMetrics());
     }
 }

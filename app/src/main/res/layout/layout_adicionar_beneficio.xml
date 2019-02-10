@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:hint="@string/dgBeneficio"
                 android:inputType="textPersonName"
                 android:maxLength="13"
                 android:minEms="6" />
@@ -68,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="5dp"
+                android:paddingStart="0dp"
                 android:text="@string/txDesconto" />
 
             <EditText

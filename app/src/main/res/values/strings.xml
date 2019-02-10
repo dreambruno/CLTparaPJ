@@ -14,6 +14,7 @@
     <string name="btExcluir">Excluir</string>
     <string name="dgTituloAdd">Adicionar Benefício</string>
     <string name="dgTituloEdit">Editar Benefício</string>
+    <string name="dgBeneficio">Benefício</string>
     <string name="txNome">Nome:</string>
     <string name="txValor">Valor:</string>
     <string name="txDesconto">Desconto:</string>

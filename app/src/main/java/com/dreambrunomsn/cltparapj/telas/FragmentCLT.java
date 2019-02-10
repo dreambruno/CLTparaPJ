@@ -2,7 +2,6 @@ package com.dreambrunomsn.cltparapj.telas;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.classes.LinhaBeneficio;
+import com.dreambrunomsn.cltparapj.classes.LinhaDesconto;
 import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
@@ -71,6 +70,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
             }
         });
 
+        this.init();
+
         return view;
     }
 
@@ -89,7 +90,6 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     }
 
     private void init(){
-        ViewGroup.LayoutParams layout = new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
         tvTransporte.setText(informacoes.getDescontoTransporte());
         tvInss.setText(informacoes.getInss());
 
@@ -104,24 +104,12 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
         for (Beneficio beneficio : informacoes.getBeneficios().values()){
             if(beneficio.getValor() > 0 && beneficio.getCod() != 0) {
-                LinhaBeneficio linha = new LinhaBeneficio(getContext(), beneficio);
-                painelBeneficios.addView(linha);
+                LinhaBeneficio linhaBeneficio = new LinhaBeneficio(getContext(), beneficio);
+                painelBeneficios.addView(linhaBeneficio);
             }
             if(beneficio.getDesconto() > 0){
-                LinearLayout linha = new LinearLayout(getContext());
-                linha.setGravity(Gravity.RIGHT);
-                linha.setId(beneficio.getCod());
-
-                TextView tx1 = new TextView(getContext());
-                tx1.setText(Mascaras.primeiraMaiuscula(beneficio.getNome()) + ":");
-                tx1.setPadding(0,0,4,0);
-
-                TextView tx2 = new TextView(getContext());
-                tx2.setText(beneficio.getDescontoFormatado());
-
-                linha.addView(tx1);
-                linha.addView(tx2);
-                painelDescontos.addView(linha, layout);
+                LinhaDesconto linhaDesconto = new LinhaDesconto(getContext(), beneficio);
+                painelDescontos.addView(linhaDesconto);
             }
         }
     }
