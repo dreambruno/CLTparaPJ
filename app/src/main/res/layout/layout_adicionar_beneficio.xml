@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorAccent"
                 android:hint="@string/dgBeneficio"
                 android:inputType="textPersonName"
                 android:maxLength="13"
@@ -55,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorAccent"
                 android:hint="@string/valorMensal"
                 android:inputType="number"
                 android:maxLength="11" />
@@ -77,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorAccent"
                 android:hint="@string/valorMensal"
                 android:inputType="number"
                 android:maxLength="11" />

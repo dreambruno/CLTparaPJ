@@ -54,6 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorAccent"
         android:inputType="number"
         android:maxLength="5"
         app:layout_constraintEnd_toStartOf="@+id/textView7"
@@ -78,6 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:max="5"
+        android:progressTint="@color/colorAccent"
+        android:thumbTint="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/fpMostrador"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
