@@ -1,6 +1,6 @@
 package com.dreambrunomsn.cltparapj.classes;
 
-import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
+import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.text.DecimalFormat;
@@ -23,7 +23,7 @@ public class Informacoes {
     private float pensao;
 
     private HashMap<Integer, Beneficio> beneficios;
-    private OnBeneficioChangeListener onBeneficioChangeListener;
+    private OnInformacaoChangeListener onInformacaoChangeListener;
 
     private final float FAIXA_INSS_1 = 1751.81f;
     private final float FAIXA_INSS_2 = 2919.72f;
@@ -80,29 +80,27 @@ public class Informacoes {
             valor = this.salario * imposto;
         }
 
-        DecimalFormat df = new DecimalFormat("0.00");
-        return Mascaras.contabil(String.valueOf(df.format(valor)));
+        return this.decimalDuasCasas(valor, true);
     }
 
     public String getIrrf(){
-        float base = this.salario - Mascaras.stringToFloat(this.getInss());
-        base -= filho * BASE_DEPENDENTE;
-        base -= pensao;
+        float valor = this.salario - Mascaras.stringToFloat(this.getInss());
+        valor -= filho * BASE_DEPENDENTE;
+        valor -= this.salario * (this.pensao / 100);
 
-        if(base <= BASE_IRRF_0[0]){
-            base = 0;
-        } else if(base <= BASE_IRRF_1[0]){
-            base = base * BASE_IRRF_1[1] - BASE_IRRF_1[2];
-        } else if(base <= BASE_IRRF_2[0]){
-            base = base * BASE_IRRF_2[1] - BASE_IRRF_2[2];
-        } else if(base <= BASE_IRRF_3[0]){
-            base = base * BASE_IRRF_3[1] - BASE_IRRF_3[2];
+        if(valor <= BASE_IRRF_0[0]){
+            valor = 0;
+        } else if(valor <= BASE_IRRF_1[0]){
+            valor = valor * BASE_IRRF_1[1] - BASE_IRRF_1[2];
+        } else if(valor <= BASE_IRRF_2[0]){
+            valor = valor * BASE_IRRF_2[1] - BASE_IRRF_2[2];
+        } else if(valor <= BASE_IRRF_3[0]){
+            valor = valor * BASE_IRRF_3[1] - BASE_IRRF_3[2];
         } else {
-            base = base * BASE_IRRF_4[1] - BASE_IRRF_4[2];
+            valor = valor * BASE_IRRF_4[1] - BASE_IRRF_4[2];
         }
 
-        DecimalFormat df = new DecimalFormat("0.00");
-        return Mascaras.contabil(String.valueOf(df.format(base)));
+        return this.decimalDuasCasas(valor, true);
     }
 
     public String getDescontoTransporte() {
@@ -111,24 +109,42 @@ public class Informacoes {
             valor = this.transporte;
         }
 
-        DecimalFormat df = new DecimalFormat("0.00");
-        return Mascaras.contabil(String.valueOf(df.format(valor)));
+        return this.decimalDuasCasas(valor, true);
+    }
+
+    public String getPensaoFormatada(){
+        return this.decimalDuasCasas(this.pensao, false);
+    }
+
+    public String getValorPensao(){
+        float valor = (this.salario - Mascaras.stringToFloat(this.getInss()))  * (this.pensao / 100);
+
+        return this.decimalDuasCasas(valor, true);
     }
 
     public void addBeneficio(Beneficio beneficio){
         this.beneficios.put(beneficio.getCod(), beneficio);
-        if(onBeneficioChangeListener != null)
-            onBeneficioChangeListener.onBeneficioChange();
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
     }
 
     public void removeBeneficio(int cod){
         this.beneficios.remove(cod);
-        if(onBeneficioChangeListener != null)
-            onBeneficioChangeListener.onBeneficioChange();
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
     }
 
-    public void setOnbeneficioChangeListener(OnBeneficioChangeListener onbeneficioChangeListener){
-        this.onBeneficioChangeListener = onbeneficioChangeListener;
+    public void setOnbeneficioChangeListener(OnInformacaoChangeListener onbeneficioChangeListener){
+        this.onInformacaoChangeListener = onbeneficioChangeListener;
+    }
+
+    private String decimalDuasCasas(float valor, boolean contabil){
+        DecimalFormat df = new DecimalFormat("0.00");
+        if(contabil) {
+            return Mascaras.contabil(String.valueOf(df.format(valor)));
+        } else {
+            return Mascaras.decimal(String.valueOf(df.format(valor)));
+        }
     }
 
 
@@ -145,6 +161,8 @@ public class Informacoes {
     }
     public void setFilho(int filho) {
         this.filho = filho;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
     }
 
     public float getPensao(){
@@ -152,6 +170,8 @@ public class Informacoes {
     }
     public void setPensao(float pensao){
         this.pensao = pensao;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
     }
 
     public float getSalario() {
@@ -159,6 +179,8 @@ public class Informacoes {
     }
     public void setSalario(String salario) {
         this.salario = Mascaras.stringToFloat(salario);
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
     }
 
     public float getTransporte() {
@@ -166,6 +188,8 @@ public class Informacoes {
     }
     public void setTransporte(String transporte) {
         this.transporte = Mascaras.stringToFloat(transporte) * 22;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
     }
 
     public float getRefeicao() {

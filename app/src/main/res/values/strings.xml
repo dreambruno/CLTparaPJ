@@ -19,6 +19,11 @@
     <string name="txValor">Valor:</string>
     <string name="txDesconto">Desconto:</string>
 
+    <!-- Adicionar Beneficio -->
+    <string name="fpTitulo">Configuração Dependente</string>
+    <string name="fpFilhos">Filhos:</string>
+    <string name="fpPensao">Pensão:</string>
+
     <!-- Dashboard -->
     <string name="tab_text_1">CLT</string>
     <string name="tab_text_2">MEI</string>

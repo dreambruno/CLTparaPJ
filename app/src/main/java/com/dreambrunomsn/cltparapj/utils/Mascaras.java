@@ -14,7 +14,7 @@ public class Mascaras {
     public static final int SALARIO = 1;
     public static final int TRANSPORTE = 2;
     public static final int REFEICAO = 3;
-    public static final int ALIMENTACAO = 4;
+    public static final int PENSAO = 4;
 
     public static void listener(final EditText editText, final int mascara, final TextView textView, final TextView textViewAux){
         editText.addTextChangedListener(new TextWatcher() {
@@ -54,6 +54,9 @@ public class Mascaras {
                         informacoes.setRefeicao(refeicao);
                         editText.setText(refeicao);
                         break;
+                    case PENSAO:
+                        String pensao = Mascaras.decimal(editable.toString());
+                        editText.setText(pensao);
                 }
 
                 editText.addTextChangedListener(this);
@@ -64,7 +67,7 @@ public class Mascaras {
         //return editText;
     }
 
-    public static String contabil(String texto) {
+    public static String decimal(String texto) {
         String valor = texto.replaceAll("\\D", "");
         String decimal;
 
@@ -76,16 +79,16 @@ public class Mascaras {
             case 0:
                 return "";
             case 1:
-                return "R$ 0,0" + valor;
+                return "0,0" + valor;
             case 2:
-                return "R$ 0," + valor;
+                return "0," + valor;
             default:
                 decimal = "," + valor.substring(valor.length() -2);
                 valor = valor.substring(0, valor.length() -2);
         }
 
         if(valor.length() <= 3){
-            return "R$ " + valor + decimal;
+            return valor + decimal;
         } else {
             String formatado = "";
             do{
@@ -93,7 +96,16 @@ public class Mascaras {
                 valor = valor.substring(0, valor.length() - 3);
             } while(valor.length() > 3);
 
-            return "R$ " + valor + formatado + decimal;
+            return valor + formatado + decimal;
+        }
+    }
+
+    public static String contabil(String texto){
+        String valor = Mascaras.decimal(texto);
+        if(valor.length() == 0){
+            return "";
+        } else {
+            return "R$ " + valor;
         }
     }
 

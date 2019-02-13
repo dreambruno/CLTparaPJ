@@ -9,18 +9,23 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
-public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener{
+public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener, SeekBar.OnSeekBarChangeListener{
 
     private Button salvar;
 
-    private EditText filho;
+    private SeekBar filho;
     private EditText pensao;
+    private TextView mostrador;
+
+    private Informacoes informacoes;
 
 
     // CONSTRUCTOR
@@ -34,11 +39,22 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        filho = (EditText)findViewById(R.id.fpFilho);
+        informacoes = Informacoes.getInstance();
+
+        mostrador = (TextView)findViewById(R.id.fpMostrador);
+
+        filho = (SeekBar)findViewById(R.id.fpFilho);
+        filho.setOnSeekBarChangeListener(this);
+
         pensao = (EditText)findViewById(R.id.fpPensao);
+        Mascaras.listener(pensao, Mascaras.PENSAO, null, null);
 
         salvar = (Button)findViewById(R.id.fpSalvar);
         salvar.setOnClickListener(this);
+
+        mostrador.setText(String.valueOf(informacoes.getFilho()));
+        filho.setProgress(informacoes.getFilho());
+        pensao.setText(informacoes.getPensaoFormatada());
     }
 
     @Override
@@ -58,12 +74,17 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
         super.dismiss();
     }
 
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        mostrador.setText(String.valueOf(i));
+    }
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) { }
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) { }
+
     private void salvar(){
-        Informacoes informacoes = Informacoes.getInstance();
-
-        informacoes.setFilho(Integer.parseInt(filho.getText().toString())); //TODO: AJUSTAR GET
-        informacoes.setPensao(Float.valueOf(pensao.getText().toString())); //TODO: AJUSTAR GET
-
-        Toast.makeText(getContext(), "Filho!", Toast.LENGTH_SHORT).show();
+        informacoes.setFilho(filho.getProgress());
+        informacoes.setPensao(Mascaras.stringToFloat(pensao.getText().toString()));
     }
 }

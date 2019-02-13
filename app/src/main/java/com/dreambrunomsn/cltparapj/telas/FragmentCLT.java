@@ -16,7 +16,7 @@ import com.dreambrunomsn.cltparapj.classes.Beneficio;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.classes.LinhaBeneficio;
 import com.dreambrunomsn.cltparapj.classes.LinhaDesconto;
-import com.dreambrunomsn.cltparapj.conectores.OnBeneficioChangeListener;
+import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.dialogs.AdicionarFilhoPensao;
 import com.dreambrunomsn.cltparapj.dialogs.AdicionarBeneficio;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
@@ -30,11 +30,13 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     private TextView tvInss;
     private TextView tvIrrf;
     private TextView tvTransporte;
+    private TextView tvPensao;
 
     private Button btAddBeneficio;
 
     private LinearLayout painelDescontos;
     private LinearLayout painelBeneficios;
+    private LinearLayout painelPensao;
 
     private FloatingActionButton floatingActionButton;
     private Informacoes informacoes;
@@ -48,8 +50,10 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         informacoes = Informacoes.getInstance();
         painelDescontos = (LinearLayout)view.findViewById(R.id.painelDescontos);
         painelBeneficios = (LinearLayout)view.findViewById(R.id.painelBeneficios);
+        painelPensao = (LinearLayout)view.findViewById(R.id.painelPensao);
 
         tvTransporte = (TextView)view.findViewById(R.id.tvTransporte);
+        tvPensao= (TextView)view.findViewById(R.id.tvPensao);
 
         tvInss = (TextView)view.findViewById(R.id.tvInss);
         tvIrrf = (TextView)view.findViewById(R.id.tvIrrf);
@@ -68,9 +72,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         btAddBeneficio = (Button)view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
 
-        informacoes.setOnbeneficioChangeListener(new OnBeneficioChangeListener() {
+        informacoes.setOnbeneficioChangeListener(new OnInformacaoChangeListener() {
             @Override
-            public void onBeneficioChange() {
+            public void onInformacaoChange() {
                 init();
             }
         });
@@ -113,6 +117,13 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         // adicionar linhas
         if(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValor() > 0){
             etRefeicao.setText(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValorFormatado());
+        }
+
+        if(informacoes.getPensao() > 0){
+            tvPensao.setText(informacoes.getValorPensao());
+            painelPensao.setVisibility(View.VISIBLE);
+        } else {
+            painelPensao.setVisibility(View.GONE);
         }
 
         for (Beneficio beneficio : informacoes.getBeneficios()){

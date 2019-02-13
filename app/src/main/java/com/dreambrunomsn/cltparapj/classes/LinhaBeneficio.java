@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.dialogs.AdicionarBeneficio;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
@@ -31,6 +32,7 @@ public class LinhaBeneficio extends LinearLayout {
 
         EditText valor = new EditText(context);
         valor.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        //valor.setLinkTextColor(getResources().getColor(R.color.colorAccent));
         valor.setText(beneficio.getValorFormatado());
         valor.setFocusable(false);
         valor.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
