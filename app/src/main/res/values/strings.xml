@@ -19,10 +19,14 @@
     <string name="txValor">Valor:</string>
     <string name="txDesconto">Desconto:</string>
 
-    <!-- Adicionar Beneficio -->
+    <!-- Configurar Filho Pensão -->
     <string name="fpTitulo">Configuração Dependente</string>
     <string name="fpFilhos">Filhos:</string>
     <string name="fpPensao">Pensão:</string>
+    <string name="fpClt">(Modelo CLT*)</string>
+    <string name="fpMei">(Modelo MEI*)</string>
+    <string name="fpObs">*Modelo CLT e MEI para com e sem vinculo empregaticio.</string>
+    <string name="fpPorcento">%</string>
 
     <!-- Dashboard -->
     <string name="tab_text_1">CLT</string>
@@ -45,5 +49,12 @@
     <string name="valorMensal">Valor Mensal</string>
     <string name="valorDiario">Valor Diário</string>
     <string name="valorZero">R$ 0,00</string>
+
+    <!-- MEI -->
+    <string name="txComImposto">(c/imposto e pensão)</string>
+    <string name="txLiquido">(Liquido)</string>
+    <string name="txFerias">Férias:</string>
+    <string name="txAnual">Valor Anual:</string>
+    <string name="txCBeneficio">(c/ benefícios)</string>
 
 </resources>

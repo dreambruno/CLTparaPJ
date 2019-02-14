@@ -106,9 +106,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     }
 
     private void init(){
-        tvTransporte.setText(informacoes.getDescontoTransporte());
-        tvInss.setText(informacoes.getInss());
-        tvIrrf.setText(informacoes.getIrrf());
+        tvTransporte.setText(informacoes.getDescontoTransporteFormatado());
+        tvInss.setText(informacoes.getInssFormatado());
+        tvIrrf.setText(informacoes.getIrrfFormatado());
 
         // deletar as linhas
         painelDescontos.removeAllViews();
@@ -119,8 +119,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
             etRefeicao.setText(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValorFormatado());
         }
 
-        if(informacoes.getPensao() > 0){
-            tvPensao.setText(informacoes.getValorPensao());
+        if(informacoes.getPensaoClt() > 0){
+            tvPensao.setText(informacoes.getValorPensaoClt());
             painelPensao.setVisibility(View.VISIBLE);
         } else {
             painelPensao.setVisibility(View.GONE);

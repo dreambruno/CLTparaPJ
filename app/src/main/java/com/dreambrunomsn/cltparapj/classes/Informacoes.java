@@ -3,7 +3,6 @@ package com.dreambrunomsn.cltparapj.classes;
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,11 +18,13 @@ public class Informacoes {
 
     private float salario;
     private float transporte;
-    private float refeicao;
-    private float pensao;
+    private float pensaoClt;
+    private float pensaoMei;
 
     private HashMap<Integer, Beneficio> beneficios;
     private OnInformacaoChangeListener onInformacaoChangeListener;
+
+    private final float SALARIO_MINIMO = 998.00f;
 
     private final float FAIXA_INSS_1 = 1751.81f;
     private final float FAIXA_INSS_2 = 2919.72f;
@@ -41,11 +42,11 @@ public class Informacoes {
     private Informacoes() {
         this.salario = 0;
         this.transporte = 0;
-        this.refeicao = 0;
         this.codigo = 0;
         this.beneficios = new HashMap<Integer, Beneficio>();
         this.filho = 0;
-        this.pensao = 0;
+        this.pensaoClt = 0;
+        this.pensaoMei = 0;
 
         Beneficio bn = new Beneficio();
         bn.setCod(this.getCodigo());
@@ -62,64 +63,36 @@ public class Informacoes {
         return ourInstance;
     }
 
-    public String getInss() {
-        float imposto;
-        float valor;
-
-        if(this.salario <= FAIXA_INSS_1){
-            imposto = 0.08f;
-        } else if(this.salario <= FAIXA_INSS_2){
-            imposto = 0.09f;
-        } else {
-            imposto = 0.11f;
-        }
-
-        if(this.salario > FAIXA_INSS_3) {
-            valor = FAIXA_FIXA;
-        } else {
-            valor = this.salario * imposto;
-        }
-
-        return this.decimalDuasCasas(valor, true);
+    public String getInssFormatado() {
+        return Mascaras.decimalDuasCasas(getInss(), true);
     }
 
-    public String getIrrf(){
-        float valor = this.salario - Mascaras.stringToFloat(this.getInss());
-        valor -= filho * BASE_DEPENDENTE;
-        valor -= this.salario * (this.pensao / 100);
-
-        if(valor <= BASE_IRRF_0[0]){
-            valor = 0;
-        } else if(valor <= BASE_IRRF_1[0]){
-            valor = valor * BASE_IRRF_1[1] - BASE_IRRF_1[2];
-        } else if(valor <= BASE_IRRF_2[0]){
-            valor = valor * BASE_IRRF_2[1] - BASE_IRRF_2[2];
-        } else if(valor <= BASE_IRRF_3[0]){
-            valor = valor * BASE_IRRF_3[1] - BASE_IRRF_3[2];
-        } else {
-            valor = valor * BASE_IRRF_4[1] - BASE_IRRF_4[2];
-        }
-
-        return this.decimalDuasCasas(valor, true);
+    public String getIrrfFormatado(){
+        return Mascaras.decimalDuasCasas(getIrrf(), true);
     }
 
-    public String getDescontoTransporte() {
-        float valor = this.salario * 0.06f;
-        if(valor > this.transporte){
-            valor = this.transporte;
-        }
-
-        return this.decimalDuasCasas(valor, true);
+    public String getDescontoTransporteFormatado() {
+        return Mascaras.decimalDuasCasas(getDescontoTransporte(), true);
     }
 
-    public String getPensaoFormatada(){
-        return this.decimalDuasCasas(this.pensao, false);
+    public String getPensaoCltFormatada(){
+        return Mascaras.decimalDuasCasas(this.pensaoClt, false);
     }
 
-    public String getValorPensao(){
-        float valor = (this.salario - Mascaras.stringToFloat(this.getInss()))  * (this.pensao / 100);
+    public String getPensaoMeiFormatada(){
+        return Mascaras.decimalDuasCasas(this.pensaoMei, false);
+    }
 
-        return this.decimalDuasCasas(valor, true);
+    public String getValorPensaoClt(){
+        float valor = (this.salario - Mascaras.stringToFloat(this.getInssFormatado()))  * (this.pensaoClt / 100);
+
+        return Mascaras.decimalDuasCasas(valor, true);
+    }
+
+    public String getValorPensaoMei(){
+        float valor = this.SALARIO_MINIMO  * (this.pensaoMei / 100);
+
+        return Mascaras.decimalDuasCasas(valor, true);
     }
 
     public void addBeneficio(Beneficio beneficio){
@@ -136,15 +109,6 @@ public class Informacoes {
 
     public void setOnbeneficioChangeListener(OnInformacaoChangeListener onbeneficioChangeListener){
         this.onInformacaoChangeListener = onbeneficioChangeListener;
-    }
-
-    private String decimalDuasCasas(float valor, boolean contabil){
-        DecimalFormat df = new DecimalFormat("0.00");
-        if(contabil) {
-            return Mascaras.contabil(String.valueOf(df.format(valor)));
-        } else {
-            return Mascaras.decimal(String.valueOf(df.format(valor)));
-        }
     }
 
 
@@ -165,11 +129,20 @@ public class Informacoes {
             onInformacaoChangeListener.onInformacaoChange();
     }
 
-    public float getPensao(){
-        return pensao;
+    public float getPensaoClt(){
+        return pensaoClt;
     }
-    public void setPensao(float pensao){
-        this.pensao = pensao;
+    public void setPensaoClt(float pensaoClt){
+        this.pensaoClt = pensaoClt;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
+    }
+
+    public float getPensaoMei(){
+        return pensaoMei;
+    }
+    public void setPensaoMei(float pensaoMei){
+        this.pensaoMei = pensaoMei;
         if(onInformacaoChangeListener != null)
             onInformacaoChangeListener.onInformacaoChange();
     }
@@ -190,13 +163,6 @@ public class Informacoes {
         this.transporte = Mascaras.stringToFloat(transporte) * 22;
         if(onInformacaoChangeListener != null)
             onInformacaoChangeListener.onInformacaoChange();
-    }
-
-    public float getRefeicao() {
-        return refeicao;
-    }
-    public void setRefeicao(String refeicao) {
-        this.refeicao = Mascaras.stringToFloat(refeicao);
     }
 
     public List<Beneficio> getBeneficios() {
@@ -226,5 +192,55 @@ public class Informacoes {
     }
     public void setBeneficios(HashMap<Integer, Beneficio> beneficios) {
         this.beneficios = beneficios;
+    }
+
+    public float getDescontoTransporte() {
+        float valor = this.salario * 0.06f;
+        if(valor > this.transporte){
+            valor = this.transporte;
+        }
+
+        return valor;
+    }
+
+    public float getInss() {
+        float imposto;
+        float valor;
+
+        if(this.salario <= FAIXA_INSS_1){
+            imposto = 0.08f;
+        } else if(this.salario <= FAIXA_INSS_2){
+            imposto = 0.09f;
+        } else {
+            imposto = 0.11f;
+        }
+
+        if(this.salario > FAIXA_INSS_3) {
+            valor = FAIXA_FIXA;
+        } else {
+            valor = this.salario * imposto;
+        }
+
+        return valor;
+    }
+
+    public float getIrrf(){
+        float valor = this.salario - Mascaras.stringToFloat(this.getInssFormatado());
+        valor -= filho * BASE_DEPENDENTE;
+        valor -= this.salario * (this.pensaoClt / 100);
+
+        if(valor <= BASE_IRRF_0[0]){
+            valor = 0;
+        } else if(valor <= BASE_IRRF_1[0]){
+            valor = valor * BASE_IRRF_1[1] - BASE_IRRF_1[2];
+        } else if(valor <= BASE_IRRF_2[0]){
+            valor = valor * BASE_IRRF_2[1] - BASE_IRRF_2[2];
+        } else if(valor <= BASE_IRRF_3[0]){
+            valor = valor * BASE_IRRF_3[1] - BASE_IRRF_3[2];
+        } else {
+            valor = valor * BASE_IRRF_4[1] - BASE_IRRF_4[2];
+        }
+
+        return valor;
     }
 }

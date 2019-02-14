@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 
+import java.text.DecimalFormat;
+
 public class Mascaras {
 
     public static final int CONTABIL = 0;
@@ -40,18 +42,17 @@ public class Mascaras {
                         String salario = Mascaras.contabil(editable.toString());
                         informacoes.setSalario(salario);
                         editText.setText(salario);
-                        textView.setText(informacoes.getInss());
-                        textViewAux.setText(informacoes.getIrrf());
+                        textView.setText(informacoes.getInssFormatado());
+                        textViewAux.setText(informacoes.getIrrfFormatado());
                         break;
                     case TRANSPORTE:
                         String transporte = Mascaras.contabil(editable.toString());
                         informacoes.setTransporte(transporte);
                         editText.setText(transporte);
-                        textView.setText(informacoes.getDescontoTransporte());
+                        textView.setText(informacoes.getDescontoTransporteFormatado());
                         break;
                     case REFEICAO:
                         String refeicao = Mascaras.contabil(editable.toString());
-                        informacoes.setRefeicao(refeicao);
                         editText.setText(refeicao);
                         break;
                     case PENSAO:
@@ -133,5 +134,14 @@ public class Mascaras {
         }
 
         return textoTratado.trim();
+    }
+
+    public static String decimalDuasCasas(float valor, boolean contabil){
+        DecimalFormat df = new DecimalFormat("0.00");
+        if(contabil) {
+            return Mascaras.contabil(String.valueOf(df.format(valor)));
+        } else {
+            return Mascaras.decimal(String.valueOf(df.format(valor)));
+        }
     }
 }

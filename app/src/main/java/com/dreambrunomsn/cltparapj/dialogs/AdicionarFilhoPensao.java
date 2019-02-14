@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
@@ -22,7 +21,8 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
     private Button salvar;
 
     private SeekBar filho;
-    private EditText pensao;
+    private EditText pensaoClt;
+    private EditText pensaoMei;
     private TextView mostrador;
 
     private Informacoes informacoes;
@@ -46,15 +46,18 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
         filho = (SeekBar)findViewById(R.id.fpFilho);
         filho.setOnSeekBarChangeListener(this);
 
-        pensao = (EditText)findViewById(R.id.fpPensao);
-        Mascaras.listener(pensao, Mascaras.PENSAO, null, null);
+        pensaoClt = (EditText)findViewById(R.id.fpPensaoClt);
+        Mascaras.listener(pensaoClt, Mascaras.PENSAO, null, null);
+
+        pensaoMei = (EditText)findViewById(R.id.fpPensaoMei);
+        Mascaras.listener(pensaoMei, Mascaras.PENSAO, null, null);
 
         salvar = (Button)findViewById(R.id.fpSalvar);
         salvar.setOnClickListener(this);
 
         mostrador.setText(String.valueOf(informacoes.getFilho()));
         filho.setProgress(informacoes.getFilho());
-        pensao.setText(informacoes.getPensaoFormatada());
+        pensaoClt.setText(informacoes.getPensaoCltFormatada());
     }
 
     @Override
@@ -85,6 +88,7 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
 
     private void salvar(){
         informacoes.setFilho(filho.getProgress());
-        informacoes.setPensao(Mascaras.stringToFloat(pensao.getText().toString()));
+        informacoes.setPensaoClt(Mascaras.stringToFloat(pensaoClt.getText().toString()));
+        informacoes.setPensaoMei(Mascaras.stringToFloat(pensaoMei.getText().toString()));
     }
 }
