@@ -51,7 +51,8 @@
     <string name="valorZero">R$ 0,00</string>
 
     <!-- MEI -->
-    <string name="txComImposto">(c/imposto e pensão)</string>
+    <string name="tx13Salario">13º Salário:</string>
+    <string name="txComImposto">(c/ Imposto e Pensão)</string>
     <string name="txLiquido">(Liquido)</string>
     <string name="txFerias">Férias:</string>
     <string name="txAnual">Valor Anual:</string>

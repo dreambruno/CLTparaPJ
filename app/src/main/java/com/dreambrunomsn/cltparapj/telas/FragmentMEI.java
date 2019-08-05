@@ -93,7 +93,7 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
 
     private String getSalarioLiquido(){
         float valor = informacoes.getSalario();
-        float[] beneficios = getBeneficiosMes();
+        float[] beneficios = this.getBeneficiosMes();
 
         beneficios[DEBITO] += informacoes.getInss();
         beneficios[DEBITO] += informacoes.getIrrf();

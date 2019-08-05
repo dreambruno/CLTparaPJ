@@ -1,6 +1,9 @@
 package com.dreambrunomsn.cltparapj.classes;
 
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
+import com.dreambrunomsn.cltparapj.enums.INSS;
+import com.dreambrunomsn.cltparapj.enums.IRRF;
+import com.dreambrunomsn.cltparapj.enums.SalarioMinimo;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.util.ArrayList;
@@ -24,19 +27,12 @@ public class Informacoes {
     private HashMap<Integer, Beneficio> beneficios;
     private OnInformacaoChangeListener onInformacaoChangeListener;
 
-    private final float SALARIO_MINIMO = 998.00f;
-
-    private final float FAIXA_INSS_1 = 1751.81f;
-    private final float FAIXA_INSS_2 = 2919.72f;
-    private final float FAIXA_INSS_3 = 5839.45f;
-    private final float FAIXA_FIXA = 642.34f;
-
-    private final float BASE_IRRF_0[] = {1903.98f, 0f, 0f};
+    /*private final float BASE_IRRF_0[] = {1903.98f, 0f, 0f};
     private final float BASE_IRRF_1[] = {2826.65f, 0.075f, 142.80f};
     private final float BASE_IRRF_2[] = {3751.05f, 0.15f, 354.80f};
     private final float BASE_IRRF_3[] = {4664.68f, 0.225f, 636.13f};
     private final float BASE_IRRF_4[] = {0f, 0.275f, 869.36f};
-    private final float BASE_DEPENDENTE = 189.59f;
+    private final float BASE_DEPENDENTE = 189.59f;*/
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
@@ -90,7 +86,7 @@ public class Informacoes {
     }
 
     public String getValorPensaoMei(){
-        float valor = this.SALARIO_MINIMO  * (this.pensaoMei / 100);
+        float valor = SalarioMinimo.VALOR.getValor() * (this.pensaoMei / 100);
 
         return Mascaras.decimalDuasCasas(valor, true);
     }
@@ -168,6 +164,7 @@ public class Informacoes {
     public List<Beneficio> getBeneficios() {
 
         List<Integer> keys = new ArrayList<Integer>(beneficios.keySet());
+
         Collections.sort(keys, new Comparator<Integer>() {
             @Override
             public int compare(Integer x, Integer y) {
@@ -185,11 +182,13 @@ public class Informacoes {
         }
         return lista;
     }
+
     public Beneficio getBeneficios(int key){
         if(beneficios.containsKey(key))
             return beneficios.get(key);
         return null;
     }
+
     public void setBeneficios(HashMap<Integer, Beneficio> beneficios) {
         this.beneficios = beneficios;
     }
@@ -207,16 +206,18 @@ public class Informacoes {
         float imposto;
         float valor;
 
-        if(this.salario <= FAIXA_INSS_1){
-            imposto = 0.08f;
-        } else if(this.salario <= FAIXA_INSS_2){
-            imposto = 0.09f;
+        // Primeiro calcular faixa de imposto.
+        if(this.salario <= INSS.FAIXA_1.getValor()){
+            imposto = INSS.FAIXA_1.getImposto();
+        } else if(this.salario <= INSS.FAIXA_2.getValor()){
+            imposto = INSS.FAIXA_2.getImposto();
         } else {
-            imposto = 0.11f;
+            imposto = INSS.FAIXA_3.getImposto();
         }
 
-        if(this.salario > FAIXA_INSS_3) {
-            valor = FAIXA_FIXA;
+        // Depois calcular e retornar  o valor em R$ do imposto.
+        if(this.salario > INSS.FAIXA_3.getValor()) {
+            valor = INSS.FAIXA_FIXA.getValor();
         } else {
             valor = this.salario * imposto;
         }
@@ -226,10 +227,14 @@ public class Informacoes {
 
     public float getIrrf(){
         float valor = this.salario - Mascaras.stringToFloat(this.getInssFormatado());
-        valor -= filho * BASE_DEPENDENTE;
+        valor -= filho * IRRF.BASE_DEPENDENTE;
         valor -= this.salario * (this.pensaoClt / 100);
 
-        if(valor <= BASE_IRRF_0[0]){
+        IRRF irrf = IRRF.getIRRF(valor);
+
+        valor = ( valor * irrf.getImposto() ) - irrf.getAlicota();
+
+        /*if(valor <= IRRF.BASE_0.getSalario()){
             valor = 0;
         } else if(valor <= BASE_IRRF_1[0]){
             valor = valor * BASE_IRRF_1[1] - BASE_IRRF_1[2];
@@ -239,7 +244,7 @@ public class Informacoes {
             valor = valor * BASE_IRRF_3[1] - BASE_IRRF_3[2];
         } else {
             valor = valor * BASE_IRRF_4[1] - BASE_IRRF_4[2];
-        }
+        }*/
 
         return valor;
     }
