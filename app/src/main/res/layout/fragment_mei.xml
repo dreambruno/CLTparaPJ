@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@string/txLiquido"
+            android:text="@string/txCBeneficio"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvSalLiq"
             app:layout_constraintStart_toEndOf="@+id/tvSalLiq" />
@@ -125,6 +125,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
         <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/txAnual"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+        <TextView
             android:id="@+id/tvAnualClt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,14 +146,34 @@
             app:layout_constraintStart_toEndOf="@+id/textView34" />
 
         <TextView
+            android:id="@+id/tvAnualCltBeneficios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="@string/valorZero"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+            app:layout_constraintStart_toEndOf="@+id/textView20" />
+
+        <TextView
             android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/txLiquido"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAnualClt"
+            app:layout_constraintStart_toEndOf="@+id/tvAnualClt" />
+
+        <TextView
+            android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/txCBeneficio"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAnualClt"
-            app:layout_constraintStart_toEndOf="@+id/tvAnualClt" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvAnualCltBeneficios"
+            app:layout_constraintStart_toEndOf="@+id/tvAnualCltBeneficios" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

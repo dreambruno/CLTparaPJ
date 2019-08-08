@@ -2,6 +2,7 @@ package com.dreambrunomsn.cltparapj.telas;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +19,10 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
     private Informacoes informacoes;
 
     private TextView anualClt;
+    private TextView anualCltBeneficios;
     private TextView sal_liq;
     private TextView sal_com_imp;
     private TextView ferias;
-    /*private TextView xxx;
-    private TextView xxx;
-    private TextView xxx;
-    private TextView xxx;*/
 
     private final int CREDITO = 0;
     private final int DEBITO = 1;
@@ -36,10 +34,11 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
 
         informacoes = Informacoes.getInstance();
 
-        anualClt = (TextView)view.findViewById(R.id.tvAnualClt);
-        sal_liq = (TextView)view.findViewById(R.id.tvSalLiq);
-        sal_com_imp = (TextView)view.findViewById(R.id.tvSalImp);
-        ferias = (TextView)view.findViewById(R.id.tvFerias);
+        anualClt = view.findViewById(R.id.tvAnualClt);
+        anualCltBeneficios = view.findViewById(R.id.tvAnualCltBeneficios);
+        sal_liq = view.findViewById(R.id.tvSalLiq);
+        sal_com_imp = view.findViewById(R.id.tvSalImp);
+        ferias = view.findViewById(R.id.tvFerias);
 
         this.init();
         return view;
@@ -59,22 +58,22 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
     }
 
     private void init(){
-        sal_com_imp.setText(this.getSalarioComImposto());
-        sal_liq.setText(this.getSalarioLiquido());
-        ferias.setText(this.getFerias());
-        anualClt.setText(this.getAnual());
+        sal_com_imp.setText(Mascaras.decimalDuasCasas(this.getSalarioComImposto(informacoes.getSalario()), true));
+        sal_liq.setText(Mascaras.decimalDuasCasas(this.getSalarioLiquido(), true));
+        ferias.setText(Mascaras.decimalDuasCasas(this.getFerias(), true));
+        anualClt.setText(Mascaras.decimalDuasCasas(this.getAnual(), true));
+        anualCltBeneficios.setText(Mascaras.decimalDuasCasas(this.getAnualgetAnualComBeneficios(), true));
     }
 
-    private String getSalarioComImposto(){
-        float valor = informacoes.getSalario() - informacoes.getInss() - informacoes.getIrrf();
-        valor -= valor * (informacoes.getPensaoClt() / 100);
+    private Float getSalarioComImposto(Float valor){
+        valor -= informacoes.getInss(valor) + informacoes.getIrrf(valor) + informacoes.getPensaoCLTValor(valor);
 
-        return Mascaras.decimalDuasCasas(valor, true);
+        return valor;
     }
 
     private float[] getBeneficiosMes(){
         float[] valor = {0,0};
-        float credito = informacoes.getTransporte();
+        float credito = 0;
         float debito = informacoes.getDescontoTransporte();
 
         credito += informacoes.getBeneficios(Beneficio.REFEICAO).getValor() * 22;
@@ -91,37 +90,28 @@ public class FragmentMEI extends Fragment implements View.OnClickListener {
         return valor;
     }
 
-    private String getSalarioLiquido(){
-        float valor = informacoes.getSalario();
+    private Float getSalarioLiquido(){
+        float valor = this.getSalarioComImposto(informacoes.getSalario());
         float[] beneficios = this.getBeneficiosMes();
 
-        beneficios[DEBITO] += informacoes.getInss();
-        beneficios[DEBITO] += informacoes.getIrrf();
-        beneficios[DEBITO] += Mascaras.stringToFloat(informacoes.getValorPensaoClt());
-
-        valor = valor + beneficios[CREDITO] - beneficios[DEBITO];
-
-        return Mascaras.decimalDuasCasas(valor, true);
+        return valor + beneficios[CREDITO] - beneficios[DEBITO];
     }
 
-    private String getFerias(){
-        float valor = informacoes.getSalario();
-        valor -= informacoes.getInss() + informacoes.getIrrf() + Mascaras.stringToFloat(informacoes.getValorPensaoClt());
-        valor /= 3;
+    private Float getFerias(){
+        float valor = informacoes.getSalario() * 1.333f;
 
-        return Mascaras.decimalDuasCasas(valor, true);
+        return this.getSalarioComImposto(valor) / 3;
     }
 
-    private String getAnual(){
-        float valor = informacoes.getSalario() - informacoes.getInss() - informacoes.getIrrf();
-        float ferias = valor / 3;
-        float[] beneficios = this.getBeneficiosMes();
+    private Float getAnual(){
 
-        valor = (valor * 13) + ferias;
-        valor -= valor * (informacoes.getPensaoClt() / 100);
-        valor += beneficios[CREDITO] * 11;
-        valor -= beneficios[DEBITO] * 11;
+        return this.getSalarioComImposto(informacoes.getSalario()) * 13 + this.getFerias();
+    }
 
-        return Mascaras.decimalDuasCasas(valor, true);
+    private Float getAnualgetAnualComBeneficios(){
+
+        Float valor = this.getSalarioComImposto(informacoes.getSalario()) * 2;
+        valor += this.getFerias();
+        return valor + this.getSalarioLiquido() * 11;
     }
 }

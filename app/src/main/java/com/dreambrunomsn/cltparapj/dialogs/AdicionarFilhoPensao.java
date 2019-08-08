@@ -57,7 +57,7 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
 
         mostrador.setText(String.valueOf(informacoes.getFilho()));
         filho.setProgress(informacoes.getFilho());
-        pensaoClt.setText(informacoes.getPensaoCltFormatada());
+        pensaoClt.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoClt(), false));
     }
 
     @Override

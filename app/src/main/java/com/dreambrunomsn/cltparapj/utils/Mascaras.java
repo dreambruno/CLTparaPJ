@@ -39,17 +39,17 @@ public class Mascaras {
                         editText.setText(contabil);
                         break;
                     case SALARIO:
-                        String salario = Mascaras.contabil(editable.toString());
+                        Float salario = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setSalario(salario);
-                        editText.setText(salario);
-                        textView.setText(informacoes.getInssFormatado());
-                        textViewAux.setText(informacoes.getIrrfFormatado());
+                        editText.setText(Mascaras.decimalDuasCasas(salario, true));
+                        textView.setText(Mascaras.decimalDuasCasas(informacoes.getInss(salario), true));
+                        textViewAux.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(salario), true));
                         break;
                     case TRANSPORTE:
                         String transporte = Mascaras.contabil(editable.toString());
                         informacoes.setTransporte(transporte);
                         editText.setText(transporte);
-                        textView.setText(informacoes.getDescontoTransporteFormatado());
+                        textView.setText(Mascaras.decimalDuasCasas(informacoes.getDescontoTransporte(), true));
                         break;
                     case REFEICAO:
                         String refeicao = Mascaras.contabil(editable.toString());

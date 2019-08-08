@@ -56,6 +56,6 @@
     <string name="txLiquido">(Liquido)</string>
     <string name="txFerias">Férias:</string>
     <string name="txAnual">Valor Anual:</string>
-    <string name="txCBeneficio">(c/ benefícios)</string>
+    <string name="txCBeneficio">(Liquido c/ Benefícios)</string>
 
 </resources>

@@ -54,7 +54,6 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
         tvTransporte = (TextView)view.findViewById(R.id.tvTransporte);
         tvPensao= (TextView)view.findViewById(R.id.tvPensao);
-
         tvInss = (TextView)view.findViewById(R.id.tvInss);
         tvIrrf = (TextView)view.findViewById(R.id.tvIrrf);
 
@@ -106,9 +105,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     }
 
     private void init(){
-        tvTransporte.setText(informacoes.getDescontoTransporteFormatado());
-        tvInss.setText(informacoes.getInssFormatado());
-        tvIrrf.setText(informacoes.getIrrfFormatado());
+        tvTransporte.setText(Mascaras.decimalDuasCasas(informacoes.getDescontoTransporte(), true));
+        tvInss.setText(Mascaras.decimalDuasCasas(informacoes.getInss(informacoes.getSalario()), true));
+        tvIrrf.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(informacoes.getSalario()), true));
 
         // deletar as linhas
         painelDescontos.removeAllViews();
@@ -120,7 +119,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         }
 
         if(informacoes.getPensaoClt() > 0){
-            tvPensao.setText(informacoes.getValorPensaoClt());
+            tvPensao.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoCLTValor(informacoes.getSalario()), true));
             painelPensao.setVisibility(View.VISIBLE);
         } else {
             painelPensao.setVisibility(View.GONE);

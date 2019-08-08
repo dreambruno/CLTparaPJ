@@ -11,12 +11,12 @@ public enum IRRF {
     public static final float BASE_DEPENDENTE = 189.59f;
 
     private float salario;
-    private float imposto;
+    private float taxa;
     private float alicota;
 
-    IRRF(float salario, float imposto, float alicota) {
+    IRRF(float salario, float taxa, float alicota) {
         this.salario = salario;
-        this.imposto = imposto;
+        this.taxa = taxa;
         this.alicota = alicota;
     }
 
@@ -24,8 +24,8 @@ public enum IRRF {
         return salario;
     }
 
-    public float getImposto() {
-        return imposto;
+    public float getTaxa() {
+        return taxa;
     }
 
     public float getAlicota() {

@@ -27,19 +27,12 @@ public class Informacoes {
     private HashMap<Integer, Beneficio> beneficios;
     private OnInformacaoChangeListener onInformacaoChangeListener;
 
-    /*private final float BASE_IRRF_0[] = {1903.98f, 0f, 0f};
-    private final float BASE_IRRF_1[] = {2826.65f, 0.075f, 142.80f};
-    private final float BASE_IRRF_2[] = {3751.05f, 0.15f, 354.80f};
-    private final float BASE_IRRF_3[] = {4664.68f, 0.225f, 636.13f};
-    private final float BASE_IRRF_4[] = {0f, 0.275f, 869.36f};
-    private final float BASE_DEPENDENTE = 189.59f;*/
-
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
         this.salario = 0;
         this.transporte = 0;
         this.codigo = 0;
-        this.beneficios = new HashMap<Integer, Beneficio>();
+        this.beneficios = new HashMap<>();
         this.filho = 0;
         this.pensaoClt = 0;
         this.pensaoMei = 0;
@@ -57,38 +50,6 @@ public class Informacoes {
             ourInstance = new Informacoes();
         }
         return ourInstance;
-    }
-
-    public String getInssFormatado() {
-        return Mascaras.decimalDuasCasas(getInss(), true);
-    }
-
-    public String getIrrfFormatado(){
-        return Mascaras.decimalDuasCasas(getIrrf(), true);
-    }
-
-    public String getDescontoTransporteFormatado() {
-        return Mascaras.decimalDuasCasas(getDescontoTransporte(), true);
-    }
-
-    public String getPensaoCltFormatada(){
-        return Mascaras.decimalDuasCasas(this.pensaoClt, false);
-    }
-
-    public String getPensaoMeiFormatada(){
-        return Mascaras.decimalDuasCasas(this.pensaoMei, false);
-    }
-
-    public String getValorPensaoClt(){
-        float valor = (this.salario - Mascaras.stringToFloat(this.getInssFormatado()))  * (this.pensaoClt / 100);
-
-        return Mascaras.decimalDuasCasas(valor, true);
-    }
-
-    public String getValorPensaoMei(){
-        float valor = SalarioMinimo.VALOR.getValor() * (this.pensaoMei / 100);
-
-        return Mascaras.decimalDuasCasas(valor, true);
     }
 
     public void addBeneficio(Beneficio beneficio){
@@ -146,8 +107,8 @@ public class Informacoes {
     public float getSalario() {
         return salario;
     }
-    public void setSalario(String salario) {
-        this.salario = Mascaras.stringToFloat(salario);
+    public void setSalario(Float salario) {
+        this.salario = salario;
         if(onInformacaoChangeListener != null)
             onInformacaoChangeListener.onInformacaoChange();
     }
@@ -161,9 +122,13 @@ public class Informacoes {
             onInformacaoChangeListener.onInformacaoChange();
     }
 
+    /**
+     * Retorna uma lista de beneficios ordenada pela chave.
+     * @return List<Beneficio>
+     */
     public List<Beneficio> getBeneficios() {
 
-        List<Integer> keys = new ArrayList<Integer>(beneficios.keySet());
+        List<Integer> keys = new ArrayList<>(beneficios.keySet());
 
         Collections.sort(keys, new Comparator<Integer>() {
             @Override
@@ -176,7 +141,7 @@ public class Informacoes {
             }
         });
 
-        List<Beneficio> lista = new ArrayList<Beneficio>();
+        List<Beneficio> lista = new ArrayList<>();
         for (Integer cod : keys) {
             lista.add(beneficios.get(cod));
         }
@@ -202,50 +167,44 @@ public class Informacoes {
         return valor;
     }
 
-    public float getInss() {
+    public float getInss(Float salario) {
         float imposto;
-        float valor;
 
         // Primeiro calcular faixa de imposto.
-        if(this.salario <= INSS.FAIXA_1.getValor()){
+        if(salario <= INSS.FAIXA_1.getValor()){
             imposto = INSS.FAIXA_1.getImposto();
-        } else if(this.salario <= INSS.FAIXA_2.getValor()){
+        } else if(salario <= INSS.FAIXA_2.getValor()){
             imposto = INSS.FAIXA_2.getImposto();
         } else {
             imposto = INSS.FAIXA_3.getImposto();
         }
 
         // Depois calcular e retornar  o valor em R$ do imposto.
-        if(this.salario > INSS.FAIXA_3.getValor()) {
-            valor = INSS.FAIXA_FIXA.getValor();
+        if(salario > INSS.FAIXA_3.getValor()) {
+            return INSS.FAIXA_FIXA.getValor();
         } else {
-            valor = this.salario * imposto;
+            return salario * imposto;
         }
-
-        return valor;
     }
 
-    public float getIrrf(){
-        float valor = this.salario - Mascaras.stringToFloat(this.getInssFormatado());
-        valor -= filho * IRRF.BASE_DEPENDENTE;
-        valor -= this.salario * (this.pensaoClt / 100);
+    public float getPensaoCLTValor(Float salario){
+        float valor = salario - this.getInss(salario);
 
-        IRRF irrf = IRRF.getIRRF(valor);
+        return valor * (this.pensaoClt / 100);
+    }
 
-        valor = ( valor * irrf.getImposto() ) - irrf.getAlicota();
+    public float getPensaoMeiValor(){
 
-        /*if(valor <= IRRF.BASE_0.getSalario()){
-            valor = 0;
-        } else if(valor <= BASE_IRRF_1[0]){
-            valor = valor * BASE_IRRF_1[1] - BASE_IRRF_1[2];
-        } else if(valor <= BASE_IRRF_2[0]){
-            valor = valor * BASE_IRRF_2[1] - BASE_IRRF_2[2];
-        } else if(valor <= BASE_IRRF_3[0]){
-            valor = valor * BASE_IRRF_3[1] - BASE_IRRF_3[2];
-        } else {
-            valor = valor * BASE_IRRF_4[1] - BASE_IRRF_4[2];
-        }*/
+        return SalarioMinimo.VALOR.getValor() * (this.pensaoMei / 100);
+    }
 
-        return valor;
+    public float getIrrf(Float salario){
+        float valorBase = salario - this.getInss(salario);
+        valorBase -= filho * IRRF.BASE_DEPENDENTE;
+        valorBase -= this.getPensaoCLTValor(salario);
+
+        IRRF irrf = IRRF.getIRRF(valorBase);
+
+        return ( valorBase * irrf.getTaxa() ) - irrf.getAlicota();
     }
 }
