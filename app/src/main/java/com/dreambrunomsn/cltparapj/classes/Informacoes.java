@@ -40,8 +40,8 @@ public class Informacoes {
         Beneficio bn = new Beneficio();
         bn.setCod(this.getCodigo());
         bn.setNome("Vale Refeição");
-        bn.setValor("R$ 0,00");
-        bn.setDesconto("R$ 0,00");
+        bn.setValor(0f);
+        bn.setDesconto(0f);
         this.beneficios.put(bn.getCod(), bn);
     }
 
@@ -64,8 +64,8 @@ public class Informacoes {
             onInformacaoChangeListener.onInformacaoChange();
     }
 
-    public void setOnbeneficioChangeListener(OnInformacaoChangeListener onbeneficioChangeListener){
-        this.onInformacaoChangeListener = onbeneficioChangeListener;
+    public void setOnbeneficioChangeListener(OnInformacaoChangeListener onInformacaoChange){
+        this.onInformacaoChangeListener = onInformacaoChange;
     }
 
 

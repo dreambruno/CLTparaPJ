@@ -33,7 +33,7 @@ public class LinhaBeneficio extends LinearLayout {
         EditText valor = new EditText(context);
         valor.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
         //valor.setLinkTextColor(getResources().getColor(R.color.colorAccent));
-        valor.setText(beneficio.getValorFormatado());
+        valor.setText(Mascaras.decimalDuasCasas(beneficio.getValor(), true));
         valor.setFocusable(false);
         valor.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         valor.setOnClickListener(new OnClickListener() {

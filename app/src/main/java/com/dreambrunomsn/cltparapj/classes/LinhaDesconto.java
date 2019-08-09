@@ -31,7 +31,7 @@ public class LinhaDesconto extends LinearLayout{
         nome.setPadding(0,0, dpiToPixel(4),0);
 
         TextView valor = new TextView(context);
-        valor.setText(beneficio.getDescontoFormatado());
+        valor.setText(Mascaras.decimalDuasCasas(beneficio.getDesconto(), true));
         valor.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

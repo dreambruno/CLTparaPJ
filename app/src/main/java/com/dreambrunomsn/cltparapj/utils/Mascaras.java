@@ -64,8 +64,6 @@ public class Mascaras {
                 editText.setSelection(editText.length());
             }
         });
-
-        //return editText;
     }
 
     public static String decimal(String texto) {
@@ -113,6 +111,7 @@ public class Mascaras {
     public static float stringToFloat(String valor){
         valor = valor.replaceAll("[^0-9,]", "");
         valor = valor.replace(",", ".");
+
         try {
             return Float.parseFloat(valor);
         }catch (Exception ex){

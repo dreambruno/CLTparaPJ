@@ -21,16 +21,6 @@ public class Beneficio {
         this.desconto = 0;
     }
 
-    public String getValorFormatado() {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return Mascaras.contabil(String.valueOf(df.format(valor)));
-    }
-
-    public String getDescontoFormatado() {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return Mascaras.contabil(String.valueOf(df.format(desconto)));
-    }
-
     // GETTERS AND SETTERS
     public int getCod(){
         return cod;
@@ -49,14 +39,14 @@ public class Beneficio {
     public float getValor() {
         return valor;
     }
-    public void setValor(String valor) {
-        this.valor = Mascaras.stringToFloat(valor);
+    public void setValor(Float valor) {
+        this.valor = valor;
     }
 
     public float getDesconto() {
         return desconto;
     }
-    public void setDesconto(String desconto) {
-        this.desconto = Mascaras.stringToFloat(desconto);
+    public void setDesconto(Float desconto) {
+        this.desconto = desconto;
     }
 }

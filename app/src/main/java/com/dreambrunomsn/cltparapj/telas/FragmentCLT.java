@@ -114,9 +114,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         painelBeneficios.removeAllViews();
 
         // adicionar linhas
-        if(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValor() > 0){
-            etRefeicao.setText(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValorFormatado());
-        }
+        etRefeicao.setText(Mascaras.decimalDuasCasas(informacoes.getBeneficios().get(Beneficio.REFEICAO).getValor(), true));
 
         if(informacoes.getPensaoClt() > 0){
             tvPensao.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoCLTValor(informacoes.getSalario()), true));

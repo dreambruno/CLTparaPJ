@@ -62,8 +62,8 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
 
             nome.setFocusable(false);
             nome.setText(beneficio.getNome());
-            valor.setText(beneficio.getValorFormatado());
-            desconto.setText(beneficio.getDescontoFormatado());
+            valor.setText(Mascaras.decimalDuasCasas(beneficio.getValor(), true));
+            desconto.setText(Mascaras.decimalDuasCasas(beneficio.getDesconto(), true));
 
         }
     }
@@ -72,8 +72,7 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.dgSalvar:
-                if(valor.getText().length() > 0 || desconto.getText().length() > 0)
-                    salvar();
+                gravar();
                 dismiss();
                 break;
             case R.id.dgExcluir:
@@ -91,15 +90,21 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
         super.dismiss();
     }
 
-    public void salvar(){
+    public void gravar(){
         Informacoes informacoes = Informacoes.getInstance();
         if(beneficio == null) {
             beneficio = new Beneficio();
             beneficio.setCod(informacoes.getCodigo());
         }
+
         beneficio.setNome(nome.getText().toString());
-        beneficio.setValor(valor.getText().toString());
-        beneficio.setDesconto(desconto.getText().toString());
+        beneficio.setValor(Mascaras.stringToFloat(valor.getText().toString()));
+
+        if(beneficio.getCod() == Beneficio.REFEICAO && valor.getText().length() == 0){
+            beneficio.setDesconto(0f);
+        } else {
+            beneficio.setDesconto(Mascaras.stringToFloat(desconto.getText().toString()));
+        }
 
         informacoes.addBeneficio(beneficio);
     }
