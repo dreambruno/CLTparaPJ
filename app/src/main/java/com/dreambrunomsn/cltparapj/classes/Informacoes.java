@@ -3,7 +3,7 @@ package com.dreambrunomsn.cltparapj.classes;
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.enums.INSS;
 import com.dreambrunomsn.cltparapj.enums.IRRF;
-import com.dreambrunomsn.cltparapj.enums.SalarioMinimo;
+import com.dreambrunomsn.cltparapj.enums.InformacoesAdicionais;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.util.ArrayList;
@@ -113,11 +113,15 @@ public class Informacoes {
             onInformacaoChangeListener.onInformacaoChange();
     }
 
+    /**
+     * Valor mensal gasto com transporte
+     * @return valor imputado x quantidade de dias do mês
+     */
     public float getTransporte() {
         return transporte;
     }
     public void setTransporte(String transporte) {
-        this.transporte = Mascaras.stringToFloat(transporte) * 22;
+        this.transporte = Mascaras.stringToFloat(transporte) * InformacoesAdicionais.DIAS_NO_MES.getValor();
         if(onInformacaoChangeListener != null)
             onInformacaoChangeListener.onInformacaoChange();
     }
@@ -159,7 +163,7 @@ public class Informacoes {
     }
 
     public float getDescontoTransporte() {
-        float valor = this.salario * 0.06f;
+        float valor = this.salario * InformacoesAdicionais.DESCONTO_TRANSPORTE.getValor();
         if(valor > this.transporte){
             valor = this.transporte;
         }
@@ -195,7 +199,7 @@ public class Informacoes {
 
     public float getPensaoMeiValor(){
 
-        return SalarioMinimo.VALOR.getValor() * (this.pensaoMei / 100);
+        return InformacoesAdicionais.SALARIO_MINIMO.getValor() * (this.pensaoMei / 100);
     }
 
     public float getIrrf(Float salario){

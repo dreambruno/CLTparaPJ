@@ -39,22 +39,22 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        salvar = (Button)findViewById(R.id.dgSalvar);
+        salvar = findViewById(R.id.dgSalvar);
         salvar.setOnClickListener(this);
 
-        excluir = (Button)findViewById(R.id.dgExcluir);
+        excluir = findViewById(R.id.dgExcluir);
         excluir.setOnClickListener(this);
 
-        nome = (EditText)findViewById(R.id.dgNome);
+        nome = findViewById(R.id.dgNome);
 
-        valor = (EditText)findViewById(R.id.dgValor);
+        valor = findViewById(R.id.dgValor);
         Mascaras.listener(valor, Mascaras.CONTABIL, null, null);
 
-        desconto = (EditText)findViewById(R.id.dgDesconto);
+        desconto = findViewById(R.id.dgDesconto);
         Mascaras.listener(desconto, Mascaras.CONTABIL, null, null);
 
         if(beneficio != null){
-            TextView titulo = (TextView)findViewById(R.id.dgTxTitulo);
+            TextView titulo = findViewById(R.id.dgTxTitulo);
             titulo.setText(R.string.dgTituloEdit);
 
             if(beneficio.getCod() != 0)

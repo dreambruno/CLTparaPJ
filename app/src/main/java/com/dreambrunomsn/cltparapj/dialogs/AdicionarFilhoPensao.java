@@ -41,18 +41,18 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
 
         informacoes = Informacoes.getInstance();
 
-        mostrador = (TextView)findViewById(R.id.fpMostrador);
+        mostrador = findViewById(R.id.fpMostrador);
 
-        filho = (SeekBar)findViewById(R.id.fpFilho);
+        filho = findViewById(R.id.fpFilho);
         filho.setOnSeekBarChangeListener(this);
 
-        pensaoClt = (EditText)findViewById(R.id.fpPensaoClt);
+        pensaoClt = findViewById(R.id.fpPensaoClt);
         Mascaras.listener(pensaoClt, Mascaras.PENSAO, null, null);
 
-        pensaoMei = (EditText)findViewById(R.id.fpPensaoMei);
+        pensaoMei = findViewById(R.id.fpPensaoMei);
         Mascaras.listener(pensaoMei, Mascaras.PENSAO, null, null);
 
-        salvar = (Button)findViewById(R.id.fpSalvar);
+        salvar = findViewById(R.id.fpSalvar);
         salvar.setOnClickListener(this);
 
         mostrador.setText(String.valueOf(informacoes.getFilho()));

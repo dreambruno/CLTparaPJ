@@ -48,27 +48,27 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
         // codigo inical
         informacoes = Informacoes.getInstance();
-        painelDescontos = (LinearLayout)view.findViewById(R.id.painelDescontos);
-        painelBeneficios = (LinearLayout)view.findViewById(R.id.painelBeneficios);
-        painelPensao = (LinearLayout)view.findViewById(R.id.painelPensao);
+        painelDescontos = view.findViewById(R.id.painelDescontos);
+        painelBeneficios = view.findViewById(R.id.painelBeneficios);
+        painelPensao = view.findViewById(R.id.painelPensao);
 
-        tvTransporte = (TextView)view.findViewById(R.id.tvTransporte);
-        tvPensao= (TextView)view.findViewById(R.id.tvPensao);
-        tvInss = (TextView)view.findViewById(R.id.tvInss);
-        tvIrrf = (TextView)view.findViewById(R.id.tvIrrf);
+        tvTransporte = view.findViewById(R.id.tvTransporte);
+        tvPensao= view.findViewById(R.id.tvPensao);
+        tvInss = view.findViewById(R.id.tvInss);
+        tvIrrf = view.findViewById(R.id.tvIrrf);
 
-        etSalario = (EditText)view.findViewById(R.id.etSalario);
+        etSalario = view.findViewById(R.id.etSalario);
         Mascaras.listener(etSalario, Mascaras.SALARIO, tvInss, tvIrrf);
 
-        etTransporte = (EditText)view.findViewById(R.id.etTransporte);
+        etTransporte = view.findViewById(R.id.etTransporte);
         Mascaras.listener(etTransporte, Mascaras.TRANSPORTE, tvTransporte, null);
 
-        etRefeicao = (EditText)view.findViewById(R.id.etRefeicao);
+        etRefeicao = view.findViewById(R.id.etRefeicao);
         etRefeicao.setFocusable(false);
         etRefeicao.setOnClickListener(this);
         Mascaras.listener(etRefeicao, Mascaras.REFEICAO, null, null);
 
-        btAddBeneficio = (Button)view.findViewById(R.id.btAddBeneficio);
+        btAddBeneficio = view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
 
         informacoes.setOnbeneficioChangeListener(new OnInformacaoChangeListener() {
@@ -78,7 +78,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
             }
         });
 
-        floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
+        floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(this);
 
         this.init();

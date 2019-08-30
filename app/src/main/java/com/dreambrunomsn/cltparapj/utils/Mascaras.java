@@ -66,7 +66,7 @@ public class Mascaras {
         });
     }
 
-    public static String decimal(String texto) {
+    private static String decimal(String texto) {
         String valor = texto.replaceAll("\\D", "");
         String decimal;
 
@@ -99,7 +99,7 @@ public class Mascaras {
         }
     }
 
-    public static String contabil(String texto){
+    private static String contabil(String texto){
         String valor = Mascaras.decimal(texto);
         if(valor.length() == 0){
             return "";

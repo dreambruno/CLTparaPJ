@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.dreambrunomsn.cltparapj.telas.FragmentMEI;
+import com.dreambrunomsn.cltparapj.telas.FragmentComparativo;
 import com.dreambrunomsn.cltparapj.telas.FragmentCLT;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -20,7 +20,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 FragmentCLT clt = new FragmentCLT();
                 return clt;
             case 1:
-                FragmentMEI mei = new FragmentMEI();
+                FragmentComparativo mei = new FragmentComparativo();
                 return mei;
         }
         return null;
