@@ -4,8 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.dreambrunomsn.cltparapj.telas.FragmentComparativo;
 import com.dreambrunomsn.cltparapj.telas.FragmentCLT;
+import com.dreambrunomsn.cltparapj.telas.FragmentComparativo;
+import com.dreambrunomsn.cltparapj.telas.FragmentPJ;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -17,17 +18,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                FragmentCLT clt = new FragmentCLT();
-                return clt;
+                return new FragmentCLT();
             case 1:
-                FragmentComparativo mei = new FragmentComparativo();
-                return mei;
+                return new FragmentPJ();
+            case 2:
+                return new FragmentComparativo();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

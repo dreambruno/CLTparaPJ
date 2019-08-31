@@ -3,7 +3,7 @@
 
     <!-- Abertura -->
     <string name="bemVindo">Bem Vindo!</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="versao">Versão: 1.0.5</string>
     <string name="email">dreambruno@gmail.com</string>
     <string name="imagemCLTxPJ">Imagem representando a dúvida entre ter um contrato CLT ou PJ</string>
@@ -30,7 +30,8 @@
 
     <!-- Dashboard -->
     <string name="tab_text_1">CLT</string>
-    <string name="tab_text_2">MEI</string>
+    <string name="tab_text_2">PJ</string>
+    <string name="tab_text_3">Resultado</string>
     <string name="action_settings">Configurações</string>
 
     <!-- CLT -->
@@ -51,7 +52,7 @@
     <string name="valorDiario">Valor Diário</string>
     <string name="valorZero">R$ 0,00</string>
 
-    <!-- MEI -->
+    <!-- Comparativo -->
     <string name="tx13Salario">13º Salário:</string>
     <string name="txComImposto">(c/ Imposto e Pensão)</string>
     <string name="txLiquido">(Liquido)</string>
@@ -66,5 +67,9 @@
     <string name="txPJBeneficios">Benefícios:</string>
     <string name="txPJRefTrans">(Refeição, transporte e outros)</string>
     <string name="txPJTotal">(Total Mínimo)</string>
+
+    <!-- PJ -->
+    <string name="txContador">Contador:</string>
+    <string name="txSaude">Pl. Saúde:</string>
 
 </resources>

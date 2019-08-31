@@ -1,6 +1,7 @@
 package com.dreambrunomsn.cltparapj.telas;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.support.design.widget.FloatingActionButton;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Beneficio;
@@ -17,9 +17,10 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.classes.LinhaBeneficio;
 import com.dreambrunomsn.cltparapj.classes.LinhaDesconto;
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
-import com.dreambrunomsn.cltparapj.dialogs.AdicionarFilhoPensao;
 import com.dreambrunomsn.cltparapj.dialogs.AdicionarBeneficio;
+import com.dreambrunomsn.cltparapj.dialogs.AdicionarFilhoPensao;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
+import com.dreambrunomsn.cltparapj.utils.Utils;
 
 public class FragmentCLT extends Fragment implements View.OnClickListener{
 
@@ -44,6 +45,8 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_clt, container, false);
+
+        Utils.hideKeyboard(getActivity());
 
 
         // codigo inical
@@ -105,6 +108,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
     }
 
     private void init(){
+
         tvTransporte.setText(Mascaras.decimalDuasCasas(informacoes.getDescontoTransporte(), true));
         tvInss.setText(Mascaras.decimalDuasCasas(informacoes.getInss(informacoes.getSalario()), true));
         tvIrrf.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(informacoes.getSalario()), true));

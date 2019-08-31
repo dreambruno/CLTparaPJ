@@ -59,6 +59,8 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
 
             if(beneficio.getCod() != 0)
                 excluir.setVisibility(View.VISIBLE);
+            else
+                valor.setHint(R.string.valorDiario);
 
             nome.setFocusable(false);
             nome.setText(beneficio.getNome());
@@ -90,7 +92,7 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
         super.dismiss();
     }
 
-    public void gravar(){
+    private void gravar(){
         Informacoes informacoes = Informacoes.getInstance();
         if(beneficio == null) {
             beneficio = new Beneficio();

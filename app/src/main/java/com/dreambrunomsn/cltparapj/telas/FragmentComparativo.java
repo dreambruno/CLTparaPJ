@@ -13,6 +13,7 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.enums.FGTS;
 import com.dreambrunomsn.cltparapj.enums.InformacoesAdicionais;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
+import com.dreambrunomsn.cltparapj.utils.Utils;
 
 public class FragmentComparativo extends Fragment implements View.OnClickListener {
 
@@ -38,6 +39,8 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comparativo, container, false);
+
+        Utils.hideKeyboard(getActivity());
 
         informacoes = Informacoes.getInstance();
 
