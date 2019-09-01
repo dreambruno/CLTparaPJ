@@ -24,8 +24,8 @@
     <string name="fpFilhos">Filhos:</string>
     <string name="fpPensao">Pensão:</string>
     <string name="fpClt">(Modelo CLT*)</string>
-    <string name="fpMei">(Modelo MEI*)</string>
-    <string name="fpObs">*Modelo CLT e MEI para com e sem vinculo empregaticio.</string>
+    <string name="fpMei">(Modelo PJ*)</string>
+    <string name="fpObs">*Modelo CLT e PJ para com e sem vinculo empregaticio.</string>
     <string name="fpPorcento">%</string>
 
     <!-- Dashboard -->
@@ -67,9 +67,13 @@
     <string name="txPJBeneficios">Benefícios:</string>
     <string name="txPJRefTrans">(Refeição, transporte e outros)</string>
     <string name="txPJTotal">(Total Mínimo)</string>
+    <string name="txProLabore">Pró-Labore:</string>
 
     <!-- PJ -->
     <string name="txContador">Contador:</string>
     <string name="txSaude">Pl. Saúde:</string>
-
+    <string name="tlDesconto">Descontos</string>
+    <string name="irpf">IRPF:</string>
+    <string name="simples">Simples:</string>
+    <string name="transporte">Transporte:</string>
 </resources>

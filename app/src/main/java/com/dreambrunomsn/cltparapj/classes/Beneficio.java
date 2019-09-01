@@ -1,9 +1,5 @@
 package com.dreambrunomsn.cltparapj.classes;
 
-import com.dreambrunomsn.cltparapj.utils.Mascaras;
-
-import java.text.DecimalFormat;
-
 public class Beneficio {
 
     public static final int REFEICAO = 0;

@@ -6,7 +6,8 @@ public enum InformacoesAdicionais {
     DESCONTO_TRANSPORTE(0.06f),
     DIAS_NO_MES(22),
     MESES_NO_ANO(12),
-    ANO_SEM_FERIAS(11);
+    ANO_SEM_FERIAS(11),
+    SIMPLES(0.06f);
 
     private float valor;
 

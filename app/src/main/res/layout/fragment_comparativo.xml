@@ -256,7 +256,7 @@
                 android:text="@string/tx13Salario"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
             <TextView
                 android:id="@+id/tvPJ12eFerias"
@@ -392,15 +392,37 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvXPJAnual"
                 app:layout_constraintStart_toEndOf="@+id/tvXPJAnual" />
-        </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="OBS: Ainda não está completo. Falta colocar taxas e impostos. Atualmente eles estão sendo postos de forma fixa e não dinâmica."
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/txProLabore"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+            <TextView
+                android:id="@+id/tvProLabore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="@string/valorZero"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView52"
+                app:layout_constraintStart_toEndOf="@+id/textView52" />
+
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txPjImposto"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProLabore"
+                app:layout_constraintStart_toEndOf="@+id/tvProLabore" />
+        </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
 

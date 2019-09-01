@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/etContador"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/etSaude"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -42,7 +42,7 @@
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView48"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/etContador" />
 
             <TextView
                 android:id="@+id/textView48"
@@ -51,7 +51,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/txSaude"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/etContador" />
 
             <TextView
                 android:id="@+id/textView40"
@@ -61,6 +61,201 @@
                 android:text="@string/txContador"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@color/branco"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:text="@string/tlDesconto"
+                android:translationY="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout2" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/borda_titulo"
+                android:padding="10dp"
+                android:translationZ="-1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etProLabore">
+
+                <LinearLayout
+                    android:id="@+id/llPensaoPJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTransportePj">
+
+                    <TextView
+                        android:id="@+id/textView530"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/fpPensao"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvPensaoPj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/valorZero"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView49"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/txContador"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvContador"
+                    app:layout_constraintEnd_toStartOf="@+id/tvContador" />
+
+                <TextView
+                    android:id="@+id/tvContador"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valorZero"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSaude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valorZero"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvContador" />
+
+                <TextView
+                    android:id="@+id/textView50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/txSaude"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvSaude"
+                    app:layout_constraintEnd_toStartOf="@+id/tvSaude" />
+
+                <TextView
+                    android:id="@+id/tvInssPj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valorZero"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llPensaoPJ" />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/inss"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvInssPj"
+                    app:layout_constraintEnd_toStartOf="@+id/tvInssPj" />
+
+                <TextView
+                    android:id="@+id/tvIRPF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valorZero"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvInssPj" />
+
+                <TextView
+                    android:id="@+id/textView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/irpf"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvIRPF"
+                    app:layout_constraintEnd_toStartOf="@+id/tvIRPF" />
+
+                <TextView
+                    android:id="@+id/tvSimples"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valorZero"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvIRPF" />
+
+                <TextView
+                    android:id="@+id/textView61"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/simples"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvSimples"
+                    app:layout_constraintEnd_toStartOf="@+id/tvSimples" />
+
+                <TextView
+                    android:id="@+id/tvTransportePj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valorZero"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSaude" />
+
+                <TextView
+                    android:id="@+id/textView63"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/transporte"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTransportePj"
+                    app:layout_constraintEnd_toStartOf="@+id/tvTransportePj" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/txProLabore"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etSaude" />
+
+            <EditText
+                android:id="@+id/etProLabore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/valorMensal"
+                android:inputType="number"
+                app:layout_constraintEnd_toStartOf="@+id/textView55"
+                app:layout_constraintStart_toEndOf="@+id/textView53"
+                app:layout_constraintTop_toBottomOf="@+id/etSaude"
+                android:importantForAutofill="no" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fpPorcento"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etSaude" />
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 </ScrollView>

@@ -22,6 +22,8 @@ import com.dreambrunomsn.cltparapj.dialogs.AdicionarFilhoPensao;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 import com.dreambrunomsn.cltparapj.utils.Utils;
 
+import java.util.Objects;
+
 public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     private EditText etSalario;
@@ -44,13 +46,12 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_clt, container, false);
 
-        Utils.hideKeyboard(getActivity());
+        View view = inflater.inflate(R.layout.fragment_clt, container, false);
+        informacoes = Informacoes.getInstance();
 
 
         // codigo inical
-        informacoes = Informacoes.getInstance();
         painelDescontos = view.findViewById(R.id.painelDescontos);
         painelBeneficios = view.findViewById(R.id.painelBeneficios);
         painelPensao = view.findViewById(R.id.painelPensao);
@@ -104,6 +105,15 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
                 AdicionarFilhoPensao afp = new AdicionarFilhoPensao(getContext());
                 afp.show();
                 break;
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean visivel) {
+        super.setUserVisibleHint(visivel);
+        if(visivel && this.getView() != null){
+            Utils.hideKeyboard(Objects.requireNonNull(getActivity()));
+            this.init();
         }
     }
 

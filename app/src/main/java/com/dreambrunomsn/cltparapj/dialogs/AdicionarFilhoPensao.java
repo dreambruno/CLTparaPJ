@@ -22,7 +22,7 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
 
     private SeekBar filho;
     private EditText pensaoClt;
-    private EditText pensaoMei;
+    private EditText pensaoPJ;
     private TextView mostrador;
 
     private Informacoes informacoes;
@@ -49,8 +49,8 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
         pensaoClt = findViewById(R.id.fpPensaoClt);
         Mascaras.listener(pensaoClt, Mascaras.PENSAO, null, null);
 
-        pensaoMei = findViewById(R.id.fpPensaoMei);
-        Mascaras.listener(pensaoMei, Mascaras.PENSAO, null, null);
+        pensaoPJ = findViewById(R.id.fpPensaoMei);
+        Mascaras.listener(pensaoPJ, Mascaras.PENSAO, null, null);
 
         salvar = findViewById(R.id.fpSalvar);
         salvar.setOnClickListener(this);
@@ -58,6 +58,7 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
         mostrador.setText(String.valueOf(informacoes.getFilho()));
         filho.setProgress(informacoes.getFilho());
         pensaoClt.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoClt(), false));
+        pensaoPJ.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoPJ(), false));
     }
 
     @Override
@@ -89,6 +90,6 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
     private void salvar(){
         informacoes.setFilho(filho.getProgress());
         informacoes.setPensaoClt(Mascaras.stringToFloat(pensaoClt.getText().toString()));
-        informacoes.setPensaoMei(Mascaras.stringToFloat(pensaoMei.getText().toString()));
+        informacoes.setPensaoPJ(Mascaras.stringToFloat(pensaoPJ.getText().toString()));
     }
 }

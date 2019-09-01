@@ -1,10 +1,10 @@
 package com.dreambrunomsn.cltparapj.classes;
 
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
+import com.dreambrunomsn.cltparapj.enums.FGTS;
 import com.dreambrunomsn.cltparapj.enums.INSS;
 import com.dreambrunomsn.cltparapj.enums.IRRF;
 import com.dreambrunomsn.cltparapj.enums.InformacoesAdicionais;
-import com.dreambrunomsn.cltparapj.utils.Mascaras;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +22,11 @@ public class Informacoes {
     private float salario;
     private float transporte;
     private float pensaoClt;
-    private float pensaoMei;
+    private float pensaoPJ;
+
+    private float contador;
+    private float saude;
+    private float proLabore;
 
     private HashMap<Integer, Beneficio> beneficios;
     private OnInformacaoChangeListener onInformacaoChangeListener;
@@ -35,7 +39,10 @@ public class Informacoes {
         this.beneficios = new HashMap<>();
         this.filho = 0;
         this.pensaoClt = 0;
-        this.pensaoMei = 0;
+        this.pensaoPJ = 0;
+        this.contador = 1000;
+        this.saude = 600;
+        this.proLabore = 28;
 
         Beneficio bn = new Beneficio();
         bn.setCod(this.getCodigo());
@@ -95,11 +102,11 @@ public class Informacoes {
             onInformacaoChangeListener.onInformacaoChange();
     }
 
-    public float getPensaoMei(){
-        return pensaoMei;
+    public float getPensaoPJ(){
+        return pensaoPJ;
     }
-    public void setPensaoMei(float pensaoMei){
-        this.pensaoMei = pensaoMei;
+    public void setPensaoPJ(float pensaoPJ){
+        this.pensaoPJ = pensaoPJ;
         if(onInformacaoChangeListener != null)
             onInformacaoChangeListener.onInformacaoChange();
     }
@@ -120,10 +127,8 @@ public class Informacoes {
     public float getTransporte() {
         return transporte;
     }
-    public void setTransporte(String transporte) {
-        this.transporte = Mascaras.stringToFloat(transporte) * InformacoesAdicionais.DIAS_NO_MES.getValor();
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+    public void setTransporte(Float transporte) {
+        this.transporte = transporte * InformacoesAdicionais.DIAS_NO_MES.getValor();
     }
 
     /**
@@ -171,6 +176,11 @@ public class Informacoes {
         return valor;
     }
 
+    /**
+     * Calcula o valor a ser pago de INSS
+     * @param salario
+     * @return o desconto em Reais
+     */
     public float getInss(Float salario) {
         float imposto;
 
@@ -197,15 +207,78 @@ public class Informacoes {
         return valor * (this.pensaoClt / 100);
     }
 
-    public float getPensaoMeiValor(){
+    public float getPensaoPJValor(){
 
-        return InformacoesAdicionais.SALARIO_MINIMO.getValor() * (this.pensaoMei / 100);
+        return InformacoesAdicionais.SALARIO_MINIMO.getValor() * (this.pensaoPJ / 100);
     }
 
     public float getIrrf(Float salario){
         float valorBase = salario - this.getInss(salario);
         valorBase -= filho * IRRF.BASE_DEPENDENTE;
         valorBase -= this.getPensaoCLTValor(salario);
+
+        IRRF irrf = IRRF.getIRRF(valorBase);
+
+        return ( valorBase * irrf.getTaxa() ) - irrf.getAlicota();
+    }
+
+    public float getContador() {
+        return contador;
+    }
+    public void setContador(float contador) {
+        this.contador = contador;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
+    }
+
+    public float getSaude() {
+        return saude;
+    }
+    public void setSaude(float saude) {
+        this.saude = saude;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
+    }
+
+    public float getProLabore() {
+        return proLabore;
+    }
+    public void setProLabore(float proLabore) {
+        this.proLabore = proLabore;
+        if(onInformacaoChangeListener != null)
+            onInformacaoChangeListener.onInformacaoChange();
+    }
+    public float getProLaboreINSS(float salario){
+        float valor = salario * (this.getProLabore() / 100);
+        return this.getInss(valor);
+    }
+
+    public float getTotalPJ(){
+        float base = this.getSalario() * 1.2f;
+        base += FGTS.getRecisao(base);
+
+        float ferias = ( base * 1.333f ) / InformacoesAdicionais.MESES_NO_ANO.getValor();
+
+        float beneficios = this.getTransporte();
+        beneficios += this.getBeneficios(Beneficio.REFEICAO).getValor() * InformacoesAdicionais.DIAS_NO_MES.getValor();
+        for(Beneficio item : this.getBeneficios()){
+            beneficios += item.getValor();
+        }
+
+        float saude = this.getSaude();
+
+        float contador = this.getContador();
+
+        float total = base + ferias + beneficios + saude + contador;
+
+        return total * 1.10f; // expectativa de imposto
+    }
+
+    public float getIRPF(float sal){
+        float valorBase = sal * (this.getProLabore() / 100);
+        valorBase = valorBase - this.getInss(valorBase);
+        valorBase -= filho * IRRF.BASE_DEPENDENTE;
+        valorBase -= this.getPensaoPJValor();
 
         IRRF irrf = IRRF.getIRRF(valorBase);
 

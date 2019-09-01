@@ -15,6 +15,8 @@ import com.dreambrunomsn.cltparapj.enums.InformacoesAdicionais;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 import com.dreambrunomsn.cltparapj.utils.Utils;
 
+import java.util.Objects;
+
 public class FragmentComparativo extends Fragment implements View.OnClickListener {
 
     private Informacoes informacoes;
@@ -31,17 +33,15 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
     private TextView totalPJ;
     private TextView totalPJLiquido;
     private TextView anualPJ;
+    private TextView proLabore;
 
     private final int CREDITO = 0;
     private final int DEBITO = 1;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_comparativo, container, false);
-
-        Utils.hideKeyboard(getActivity());
-
         informacoes = Informacoes.getInstance();
 
         anualClt = view.findViewById(R.id.tvAnualClt);
@@ -56,8 +56,10 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
         totalPJ = view.findViewById(R.id.tvXPJTotal);
         totalPJLiquido = view.findViewById(R.id.tvTotalPJLiquido);
         anualPJ = view.findViewById(R.id.tvXPJAnual);
+        proLabore = view.findViewById(R.id.tvProLabore);
 
         this.init();
+
         return view;
     }
 
@@ -70,6 +72,7 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
     public void setUserVisibleHint(boolean visivel) {
         super.setUserVisibleHint(visivel);
         if(visivel && this.getView() != null){
+            Utils.hideKeyboard(Objects.requireNonNull(getActivity()));
             this.init();
         }
     }
@@ -89,6 +92,7 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
         totalPJ.setText(Mascaras.decimalDuasCasas(this.getTotalPJ(), true));
         totalPJLiquido.setText(Mascaras.decimalDuasCasas(this.getTotalComTaxas(), true));
         anualPJ.setText(Mascaras.decimalDuasCasas(this.getAnualPJ(), true));
+        proLabore.setText(Mascaras.decimalDuasCasas(this.getProLabore(), true));
     }
 
     private Float getSalarioComImposto(Float valor){
@@ -105,10 +109,9 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
         credito += informacoes.getBeneficios(Beneficio.REFEICAO).getValor() * InformacoesAdicionais.DIAS_NO_MES.getValor();
         debito += informacoes.getBeneficios(Beneficio.REFEICAO).getDesconto();
 
-        for(int i = 1; i < informacoes.getBeneficios().size(); i++){
-            Beneficio beneficio = informacoes.getBeneficios(i);
-            credito += beneficio.getValor();
-            debito += beneficio.getDesconto();
+        for(Beneficio item : informacoes.getBeneficios()){
+            credito += item.getValor();
+            debito += item.getDesconto();
         }
         valor[CREDITO] = credito;
         valor[DEBITO] = debito;
@@ -155,8 +158,8 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
         float credito = informacoes.getTransporte();
         credito += informacoes.getBeneficios(Beneficio.REFEICAO).getValor() * InformacoesAdicionais.DIAS_NO_MES.getValor();
 
-        for(int i = 1; i < informacoes.getBeneficios().size(); i++){
-            credito += informacoes.getBeneficios(i).getValor();
+        for(Beneficio item : informacoes.getBeneficios()){
+            credito += item.getValor();
         }
 
         return credito;
@@ -167,17 +170,25 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
         valor += this.getPJ13eFerias();
         valor += this.getPJBeneficios();
 
-        valor += 1600f;// valor contador e plano de saude
-        valor = valor * 1.13f; // imposto
+        valor += informacoes.getSaude();
+        valor += informacoes.getContador();
+
+        valor = valor * 1.13f; // imposto presumido
 
         return valor;
     }
 
     private Float getTotalComTaxas(){
-        return this.getTotalPJ() - 1600f - (this.getTotalPJ() * 0.11f);
+        return this.getTotalPJ() - informacoes.getSaude() - informacoes.getContador() - (this.getTotalPJ() * 0.11f);
     }
 
     private Float getAnualPJ(){
         return this.getTotalPJ() * InformacoesAdicionais.MESES_NO_ANO.getValor();
+    }
+
+    private Float getProLabore(){
+        Float valor = this.getTotalPJ() * (informacoes.getProLabore() / 100);
+
+        return valor - informacoes.getInss(valor);
     }
 }

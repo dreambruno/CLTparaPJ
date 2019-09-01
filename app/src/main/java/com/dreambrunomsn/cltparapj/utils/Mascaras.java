@@ -17,6 +17,9 @@ public class Mascaras {
     public static final int TRANSPORTE = 2;
     public static final int REFEICAO = 3;
     public static final int PENSAO = 4;
+    public static final int CONTADOR = 5;
+    public static final int SAUDE = 6;
+    public static final int PRO_LABORE = 7;
 
     public static void listener(final EditText editText, final int mascara, final TextView textView, final TextView textViewAux){
         editText.addTextChangedListener(new TextWatcher() {
@@ -35,8 +38,8 @@ public class Mascaras {
 
                 switch(mascara){
                     case CONTABIL:
-                        String contabil = Mascaras.contabil(editable.toString());
-                        editText.setText(contabil);
+                    case REFEICAO:
+                        editText.setText(Mascaras.contabil(editable.toString()));
                         break;
                     case SALARIO:
                         Float salario = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
@@ -46,18 +49,32 @@ public class Mascaras {
                         textViewAux.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(salario), true));
                         break;
                     case TRANSPORTE:
-                        String transporte = Mascaras.contabil(editable.toString());
+                        Float transporte = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setTransporte(transporte);
-                        editText.setText(transporte);
-                        textView.setText(Mascaras.decimalDuasCasas(informacoes.getDescontoTransporte(), true));
-                        break;
-                    case REFEICAO:
-                        String refeicao = Mascaras.contabil(editable.toString());
-                        editText.setText(refeicao);
+                        editText.setText(Mascaras.decimalDuasCasas(transporte, true));
+                        textView.setText(Mascaras.decimalDuasCasas(transporte, true));
                         break;
                     case PENSAO:
-                        String pensao = Mascaras.decimal(editable.toString());
-                        editText.setText(pensao);
+                        editText.setText(Mascaras.decimal(editable.toString()));
+                        break;
+                    case CONTADOR:
+                        Float contador = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        informacoes.setContador(contador);
+                        editText.setText(Mascaras.decimalDuasCasas(contador, true));
+                        textView.setText(Mascaras.decimalDuasCasas(contador, true));
+                        break;
+                    case SAUDE:
+                        Float saude = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        informacoes.setSaude(saude);
+                        editText.setText(Mascaras.decimalDuasCasas(saude, true));
+                        textView.setText(Mascaras.decimalDuasCasas(saude, true));
+                        break;
+                    case PRO_LABORE:
+                        Float proLabore = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        informacoes.setProLabore(proLabore);
+                        editText.setText(Mascaras.decimalDuasCasas(proLabore, true));
+                        textView.setText(Mascaras.decimalDuasCasas(informacoes.getProLaboreINSS(proLabore), true));
+                        break;
                 }
 
                 editText.addTextChangedListener(this);
