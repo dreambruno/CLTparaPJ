@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
+import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.enums.InformacoesAdicionais;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 import com.dreambrunomsn.cltparapj.utils.Utils;
@@ -40,18 +41,24 @@ public class FragmentPJ extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_pj, container, false);
         informacoes = Informacoes.getInstance();
+        informacoes.setOnPJChangeListener(new OnInformacaoChangeListener() {
+            @Override
+            public void onInformacaoChange() {
+                init();
+            }
+        });
 
         etContador = view.findViewById(R.id.etContador);
         tvContador = view.findViewById(R.id.tvContador);
-        Mascaras.listener(etContador, Mascaras.CONTADOR, tvContador, null);
+        Mascaras.listener(etContador, Mascaras.CONTADOR);
 
         etSaude = view.findViewById(R.id.etSaude);
         tvSaude = view.findViewById(R.id.tvSaude);
-        Mascaras.listener(etSaude, Mascaras.SAUDE, tvSaude, null);
+        Mascaras.listener(etSaude, Mascaras.SAUDE);
 
         etProlabore = view.findViewById(R.id.etProLabore);
         tvInssPj = view.findViewById(R.id.tvInssPj);
-        Mascaras.listener(etProlabore, Mascaras.PRO_LABORE, tvInssPj, null);
+        Mascaras.listener(etProlabore, Mascaras.PRO_LABORE);
 
         tvTransportePj = view.findViewById(R.id.tvTransportePj);
         tvIRPF = view.findViewById(R.id.tvIRPF);

@@ -48,10 +48,10 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
         nome = findViewById(R.id.dgNome);
 
         valor = findViewById(R.id.dgValor);
-        Mascaras.listener(valor, Mascaras.CONTABIL, null, null);
+        Mascaras.listener(valor, Mascaras.CONTABIL);
 
         desconto = findViewById(R.id.dgDesconto);
-        Mascaras.listener(desconto, Mascaras.CONTABIL, null, null);
+        Mascaras.listener(desconto, Mascaras.CONTABIL);
 
         if(beneficio != null){
             TextView titulo = findViewById(R.id.dgTxTitulo);

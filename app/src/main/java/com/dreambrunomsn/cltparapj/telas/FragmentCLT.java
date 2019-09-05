@@ -49,6 +49,12 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_clt, container, false);
         informacoes = Informacoes.getInstance();
+        informacoes.setOnCLTChangeListener(new OnInformacaoChangeListener() {
+            @Override
+            public void onInformacaoChange() {
+                init();
+            }
+        });
 
 
         // codigo inical
@@ -62,25 +68,18 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
         tvIrrf = view.findViewById(R.id.tvIrrf);
 
         etSalario = view.findViewById(R.id.etSalario);
-        Mascaras.listener(etSalario, Mascaras.SALARIO, tvInss, tvIrrf);
+        Mascaras.listener(etSalario, Mascaras.SALARIO);
 
         etTransporte = view.findViewById(R.id.etTransporte);
-        Mascaras.listener(etTransporte, Mascaras.TRANSPORTE, tvTransporte, null);
+        Mascaras.listener(etTransporte, Mascaras.TRANSPORTE);
 
         etRefeicao = view.findViewById(R.id.etRefeicao);
         etRefeicao.setFocusable(false);
         etRefeicao.setOnClickListener(this);
-        Mascaras.listener(etRefeicao, Mascaras.REFEICAO, null, null);
+        Mascaras.listener(etRefeicao, Mascaras.REFEICAO);
 
         btAddBeneficio = view.findViewById(R.id.btAddBeneficio);
         btAddBeneficio.setOnClickListener(this);
-
-        informacoes.setOnbeneficioChangeListener(new OnInformacaoChangeListener() {
-            @Override
-            public void onInformacaoChange() {
-                init();
-            }
-        });
 
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(this);

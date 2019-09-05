@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.dialogs.AdicionarBeneficio;
 import com.dreambrunomsn.cltparapj.utils.Mascaras;
 

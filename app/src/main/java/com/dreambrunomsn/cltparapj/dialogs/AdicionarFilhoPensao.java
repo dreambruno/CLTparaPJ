@@ -47,10 +47,10 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
         filho.setOnSeekBarChangeListener(this);
 
         pensaoClt = findViewById(R.id.fpPensaoClt);
-        Mascaras.listener(pensaoClt, Mascaras.PENSAO, null, null);
+        Mascaras.listener(pensaoClt, Mascaras.PENSAO);
 
         pensaoPJ = findViewById(R.id.fpPensaoMei);
-        Mascaras.listener(pensaoPJ, Mascaras.PENSAO, null, null);
+        Mascaras.listener(pensaoPJ, Mascaras.PENSAO);
 
         salvar = findViewById(R.id.fpSalvar);
         salvar.setOnClickListener(this);

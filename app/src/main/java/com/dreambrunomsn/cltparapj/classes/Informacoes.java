@@ -29,7 +29,8 @@ public class Informacoes {
     private float proLabore;
 
     private HashMap<Integer, Beneficio> beneficios;
-    private OnInformacaoChangeListener onInformacaoChangeListener;
+    private OnInformacaoChangeListener onCLTChangeListener;
+    private OnInformacaoChangeListener onPJChangeListener;
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
@@ -61,18 +62,22 @@ public class Informacoes {
 
     public void addBeneficio(Beneficio beneficio){
         this.beneficios.put(beneficio.getCod(), beneficio);
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
     public void removeBeneficio(int cod){
         this.beneficios.remove(cod);
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
-    public void setOnbeneficioChangeListener(OnInformacaoChangeListener onInformacaoChange){
-        this.onInformacaoChangeListener = onInformacaoChange;
+    public void setOnCLTChangeListener(OnInformacaoChangeListener onInformacaoChange){
+        this.onCLTChangeListener = onInformacaoChange;
+    }
+
+    public void setOnPJChangeListener(OnInformacaoChangeListener onPJChangeListener){
+        this.onPJChangeListener = onPJChangeListener;
     }
 
 
@@ -89,8 +94,8 @@ public class Informacoes {
     }
     public void setFilho(int filho) {
         this.filho = filho;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
     public float getPensaoClt(){
@@ -98,8 +103,8 @@ public class Informacoes {
     }
     public void setPensaoClt(float pensaoClt){
         this.pensaoClt = pensaoClt;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
     public float getPensaoPJ(){
@@ -107,8 +112,8 @@ public class Informacoes {
     }
     public void setPensaoPJ(float pensaoPJ){
         this.pensaoPJ = pensaoPJ;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
     public float getSalario() {
@@ -116,8 +121,8 @@ public class Informacoes {
     }
     public void setSalario(Float salario) {
         this.salario = salario;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
     /**
@@ -129,6 +134,8 @@ public class Informacoes {
     }
     public void setTransporte(Float transporte) {
         this.transporte = transporte * InformacoesAdicionais.DIAS_NO_MES.getValor();
+        if(onCLTChangeListener != null)
+            onCLTChangeListener.onInformacaoChange();
     }
 
     /**
@@ -227,8 +234,8 @@ public class Informacoes {
     }
     public void setContador(float contador) {
         this.contador = contador;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onPJChangeListener != null)
+            onPJChangeListener.onInformacaoChange();
     }
 
     public float getSaude() {
@@ -236,8 +243,8 @@ public class Informacoes {
     }
     public void setSaude(float saude) {
         this.saude = saude;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onPJChangeListener != null)
+            onPJChangeListener.onInformacaoChange();
     }
 
     public float getProLabore() {
@@ -245,8 +252,8 @@ public class Informacoes {
     }
     public void setProLabore(float proLabore) {
         this.proLabore = proLabore;
-        if(onInformacaoChangeListener != null)
-            onInformacaoChangeListener.onInformacaoChange();
+        if(onPJChangeListener != null)
+            onPJChangeListener.onInformacaoChange();
     }
     public float getProLaboreINSS(float salario){
         float valor = salario * (this.getProLabore() / 100);
