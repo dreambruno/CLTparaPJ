@@ -76,4 +76,5 @@
     <string name="irpf">IRPF:</string>
     <string name="simples">Simples:</string>
     <string name="transporte">Transporte:</string>
+    <string name="txObs">OBS: Pró-Labore influencia no seu imposto. Abaixo de 28% o imposto do "Simples" é de 15,5%. Igual ou superior a isso o imposto é de 6%.</string>
 </resources>
