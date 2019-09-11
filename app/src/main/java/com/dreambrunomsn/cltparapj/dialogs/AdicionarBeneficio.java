@@ -96,7 +96,7 @@ public class AdicionarBeneficio extends Dialog implements View.OnClickListener{
         Informacoes informacoes = Informacoes.getInstance();
         if(beneficio == null) {
             beneficio = new Beneficio();
-            beneficio.setCod(informacoes.getCodigo());
+            beneficio.setCod(informacoes.getCodigoBeneficio());
         }
 
         beneficio.setNome(nome.getText().toString());

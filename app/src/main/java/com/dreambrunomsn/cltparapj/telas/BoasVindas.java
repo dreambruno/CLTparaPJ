@@ -1,11 +1,12 @@
 package com.dreambrunomsn.cltparapj.telas;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 
 import com.dreambrunomsn.cltparapj.R;
+import com.dreambrunomsn.cltparapj.banco.Database;
 
 
 public class BoasVindas extends AppCompatActivity {
@@ -21,7 +22,8 @@ public class BoasVindas extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                // Pegando dados do save
+                // Pegando dados do banco
+                Database db = new Database(getBaseContext());
                 //List<ContentValues> lista = new DatabaseHelper(getBaseContext()).buscarEscala();
 
                 Intent intent = new Intent(BoasVindas.this, Dashboard.class);

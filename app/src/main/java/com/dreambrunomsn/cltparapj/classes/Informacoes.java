@@ -16,7 +16,8 @@ public class Informacoes {
 
     private static Informacoes ourInstance;
 
-    private int codigo;
+    private int id;
+    private int codigoBeneficio;
     private int filho;
 
     private float salario;
@@ -28,15 +29,18 @@ public class Informacoes {
     private float saude;
     private float proLabore;
 
+    private String nome;
+
     private HashMap<Integer, Beneficio> beneficios;
     private OnInformacaoChangeListener onCLTChangeListener;
     private OnInformacaoChangeListener onPJChangeListener;
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
+        this.id = 0;
         this.salario = 0;
         this.transporte = 0;
-        this.codigo = 0;
+        this.codigoBeneficio = 0;
         this.beneficios = new HashMap<>();
         this.filho = 0;
         this.pensaoClt = 0;
@@ -44,9 +48,10 @@ public class Informacoes {
         this.contador = 1000;
         this.saude = 600;
         this.proLabore = 28;
+        this.nome = "";
 
         Beneficio bn = new Beneficio();
-        bn.setCod(this.getCodigo());
+        bn.setCod(this.getCodigoBeneficio());
         bn.setNome("Vale Refeição");
         bn.setValor(0f);
         bn.setDesconto(0f);
@@ -82,11 +87,25 @@ public class Informacoes {
 
 
     // GETTERS AND SETTERS
-    public int getCodigo(){
-        return codigo++;
+    public int getId(){
+        return id;
     }
-    public void setCodigo(int codigo){
-        this.codigo = codigo;
+    public void setId( int id){
+        this.id = id;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    public int getCodigoBeneficio(){
+        return codigoBeneficio++;
+    }
+    public void setCodigoBeneficio(int codigoBeneficio){
+        this.codigoBeneficio = codigoBeneficio;
     }
 
     public int getFilho() {
