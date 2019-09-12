@@ -1,4 +1,4 @@
-package com.dreambrunomsn.cltparapj.banco;
+package com.dreambrunomsn.cltparapj.conectores;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -54,13 +54,13 @@ public class Database extends SQLiteOpenHelper {
             Log.e("console", "Método onCreate erro: " + ex.getMessage());
         } finally {
             db.endTransaction();
-            db.close();
+            //db.close();
             Log.i("console", "Método onCreate: FIM");
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        Log.i("console", "Método onUpgrade: INICIO");
     }
 }

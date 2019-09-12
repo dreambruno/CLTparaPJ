@@ -125,7 +125,7 @@ public class Mascaras {
         try {
             return Float.parseFloat(valor);
         }catch (Exception ex){
-            Log.e("console", "Mascara.stringToFloat(): " + ex);
+            Log.e("console", "Mascara.stringToFloat(): " + "\n" + ex);
             return 0;
         }
     }

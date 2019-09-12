@@ -6,10 +6,13 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dreambrunomsn.cltparapj.R;
-import com.dreambrunomsn.cltparapj.banco.Database;
+import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDao;
+import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDaoSqlite;
 
 
 public class BoasVindas extends AppCompatActivity {
+
+    InformacoesDao informacoesDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +21,18 @@ public class BoasVindas extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().hide();
 
+        informacoesDao = new InformacoesDaoSqlite(getBaseContext());
 
+        init();
+    }
+
+    private void init(){
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
                 // Pegando dados do banco
-                Database db = new Database(getBaseContext());
+
+                informacoesDao.buscar();
                 //List<ContentValues> lista = new DatabaseHelper(getBaseContext()).buscarEscala();
 
                 Intent intent = new Intent(BoasVindas.this, Dashboard.class);
