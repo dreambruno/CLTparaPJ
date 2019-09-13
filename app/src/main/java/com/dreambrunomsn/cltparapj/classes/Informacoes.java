@@ -1,5 +1,6 @@
 package com.dreambrunomsn.cltparapj.classes;
 
+import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesAUX;
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.enums.FGTS;
 import com.dreambrunomsn.cltparapj.enums.INSS;
@@ -49,6 +50,34 @@ public class Informacoes {
         this.saude = 600;
         this.proLabore = 28;
         this.nome = "";
+
+        Beneficio bn = new Beneficio();
+        bn.setCod(this.getCodigoBeneficio());
+        bn.setNome("Vale Refeição");
+        bn.setValor(0f);
+        bn.setDesconto(0f);
+        this.beneficios.put(bn.getCod(), bn);
+    }
+
+    public Informacoes(InformacoesAUX informacoesAUX) {
+        this.id = informacoesAUX.getId();
+        this.salario = informacoesAUX.getSalario();
+        this.transporte = informacoesAUX.getTransporte();
+
+        this.codigoBeneficio = informacoesAUX.getCodigoBeneficio();
+        this.filho = informacoesAUX.getFilho();
+        this.pensaoClt = informacoesAUX.getPensaoClt();
+        this.pensaoPJ = informacoesAUX.getPensaoPJ();
+        this.contador = informacoesAUX.getContador();
+        this.saude = informacoesAUX.getSaude();
+        this.proLabore = informacoesAUX.getProLabore();
+
+        this.nome = informacoesAUX.getNome();
+
+
+
+
+        this.beneficios = new HashMap<>();
 
         Beneficio bn = new Beneficio();
         bn.setCod(this.getCodigoBeneficio());
