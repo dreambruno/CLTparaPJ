@@ -2,17 +2,10 @@ package com.dreambrunomsn.cltparapj.banco.informacoes;
 
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 
-import java.util.List;
 
 public interface InformacoesDao {
 
-    List<Informacoes> buscar();
-
-    Informacoes buscar( int id );
-
-    long inserir(Informacoes informacoes);
+    void buscar( int id );
 
     boolean atualizar(Informacoes informacoes);
-
-    boolean deletar( int id );
 }

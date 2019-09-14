@@ -44,12 +44,14 @@ public class Database extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             db.execSQL(INFORMACOES);
+            //TODO: Inserir dado inicial
             Log.i("console", "Método onCreate: informações criado");
 
             db.execSQL(BENEFICIO);
+            //TODO: Inserir dado inicial
             Log.i("console", "Método onCreate: beneficios criado");
-            db.setTransactionSuccessful();
 
+            db.setTransactionSuccessful();
         } catch (Exception ex){
             Log.e("console", "Método onCreate erro: " + ex.getMessage());
         } finally {

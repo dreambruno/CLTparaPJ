@@ -1,18 +1,12 @@
 package com.dreambrunomsn.cltparapj.banco.beneficio;
 
-import com.dreambrunomsn.cltparapj.classes.Informacoes;
+import com.dreambrunomsn.cltparapj.classes.Beneficio;
 
 import java.util.List;
 
 public interface BeneficioDao {
 
-    List<Informacoes> buscar();
+    List<Beneficio> buscar();
 
-    Informacoes buscar( int id );
-
-    long inserir(Informacoes informacoes);
-
-    boolean atualizar(Informacoes informacoes);
-
-    boolean deletar( int id );
+    boolean atualizar(Beneficio beneficio);
 }

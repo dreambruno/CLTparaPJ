@@ -33,12 +33,13 @@ public class Informacoes {
     private String nome;
 
     private HashMap<Integer, Beneficio> beneficios;
+
     private OnInformacaoChangeListener onCLTChangeListener;
     private OnInformacaoChangeListener onPJChangeListener;
 
     // PRIVATE CONSTRUCTOR
     private Informacoes() {
-        this.id = 0;
+        this.id = 1;
         this.salario = 0;
         this.transporte = 0;
         this.codigoBeneficio = 0;
@@ -59,7 +60,14 @@ public class Informacoes {
         this.beneficios.put(bn.getCod(), bn);
     }
 
-    public Informacoes(InformacoesAUX informacoesAUX) {
+    public static Informacoes getInstance() {
+        if(ourInstance == null){
+            ourInstance = new Informacoes();
+        }
+        return ourInstance;
+    }
+
+    public void setInformacoes(InformacoesAUX informacoesAUX) {
         this.id = informacoesAUX.getId();
         this.salario = informacoesAUX.getSalario();
         this.transporte = informacoesAUX.getTransporte();
@@ -73,25 +81,6 @@ public class Informacoes {
         this.proLabore = informacoesAUX.getProLabore();
 
         this.nome = informacoesAUX.getNome();
-
-
-
-
-        this.beneficios = new HashMap<>();
-
-        Beneficio bn = new Beneficio();
-        bn.setCod(this.getCodigoBeneficio());
-        bn.setNome("Vale Refeição");
-        bn.setValor(0f);
-        bn.setDesconto(0f);
-        this.beneficios.put(bn.getCod(), bn);
-    }
-
-    public static Informacoes getInstance() {
-        if(ourInstance == null){
-            ourInstance = new Informacoes();
-        }
-        return ourInstance;
     }
 
     public void addBeneficio(Beneficio beneficio){

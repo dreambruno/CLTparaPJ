@@ -7,6 +7,22 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 
 public class InformacoesAUX {
 
+    // Mapeando as colunas (saudade do spring)
+    private final String ID_INFORMACOES = "id_informacoes";
+    private final String COD_BENEFICIO = "cod_beneficio";
+    private final String FILHO = "filho";
+
+    private final String SALARIO = "salario";
+    private final String TRANSPORTE = "transporte";
+    private final String PENSAO_CLT = "pensao_clt";
+    private final String PENSAO_PJ = "pensao_pj";
+    private final String CONTADOR = "contador";
+    private final String SAUDE = "saude";
+    private final String PRO_LABORE = "pro_labore";
+
+    private final String NOME = "nome";
+
+
     private int id;
     private int codigoBeneficio;
     private int filho;
@@ -21,7 +37,10 @@ public class InformacoesAUX {
 
     private String nome;
 
-    public InformacoesAUX(Informacoes informacoes){
+    // CONSTRUTORES
+    public InformacoesAUX(){
+        Informacoes informacoes = Informacoes.getInstance();
+
         this.id = informacoes.getId();
         this.codigoBeneficio = informacoes.getCodigoBeneficio();
         this.filho = informacoes.getFilho();
@@ -38,36 +57,38 @@ public class InformacoesAUX {
     }
 
     public InformacoesAUX(Cursor cursor){
-        this.id = cursor.getInt(cursor.getColumnIndex("id_informacoes"));
-        this.codigoBeneficio = cursor.getInt(cursor.getColumnIndex("cod_beneficio"));
-        this.filho = cursor.getInt(cursor.getColumnIndex("filho"));
+        this.id = cursor.getInt(cursor.getColumnIndex(ID_INFORMACOES));
+        this.codigoBeneficio = cursor.getInt(cursor.getColumnIndex(COD_BENEFICIO));
+        this.filho = cursor.getInt(cursor.getColumnIndex(FILHO));
 
-        this.salario = cursor.getFloat(cursor.getColumnIndex("salario"));
-        this.transporte = cursor.getFloat(cursor.getColumnIndex("transporte"));
-        this.pensaoClt = cursor.getFloat(cursor.getColumnIndex("pensao_clt"));
-        this.pensaoPJ = cursor.getFloat(cursor.getColumnIndex("pensao_pj"));
-        this.contador = cursor.getFloat(cursor.getColumnIndex("salacontadorrio"));
-        this.saude = cursor.getFloat(cursor.getColumnIndex("saude"));
-        this.proLabore = cursor.getFloat(cursor.getColumnIndex("pro_labore"));
+        this.salario = cursor.getFloat(cursor.getColumnIndex(SALARIO));
+        this.transporte = cursor.getFloat(cursor.getColumnIndex(TRANSPORTE));
+        this.pensaoClt = cursor.getFloat(cursor.getColumnIndex(PENSAO_CLT));
+        this.pensaoPJ = cursor.getFloat(cursor.getColumnIndex(PENSAO_PJ));
+        this.contador = cursor.getFloat(cursor.getColumnIndex(CONTADOR));
+        this.saude = cursor.getFloat(cursor.getColumnIndex(SAUDE));
+        this.proLabore = cursor.getFloat(cursor.getColumnIndex(PRO_LABORE));
 
-        this.nome = cursor.getString(cursor.getColumnIndex("nome"));
+        this.nome = cursor.getString(cursor.getColumnIndex(NOME));
     }
 
+    // MÉTODOS
     public ContentValues getContentValues(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id_informacoes", id);
-        contentValues.put("cod_beneficio", codigoBeneficio);
-        contentValues.put("filho", filho);
 
-        contentValues.put("salario", salario);
-        contentValues.put("transporte", transporte);
-        contentValues.put("pensao_clt", pensaoClt);
-        contentValues.put("pensao_pj", pensaoPJ);
-        contentValues.put("contador", contador);
-        contentValues.put("saude", saude);
-        contentValues.put("pro_labore", proLabore);
+        contentValues.put(ID_INFORMACOES, id);
+        contentValues.put(COD_BENEFICIO, codigoBeneficio);
+        contentValues.put(FILHO, filho);
 
-        contentValues.put("nome", nome);
+        contentValues.put(SALARIO, salario);
+        contentValues.put(TRANSPORTE, transporte);
+        contentValues.put(PENSAO_CLT, pensaoClt);
+        contentValues.put(PENSAO_PJ, pensaoPJ);
+        contentValues.put(CONTADOR, contador);
+        contentValues.put(SAUDE, saude);
+        contentValues.put(PRO_LABORE, proLabore);
+
+        contentValues.put(NOME, nome);
 
         return contentValues;
     }
