@@ -11,7 +11,6 @@ public class InformacoesAUX {
     private final String ID_INFORMACOES = "id_informacoes";
     private final String COD_BENEFICIO = "cod_beneficio";
     private final String FILHO = "filho";
-
     private final String SALARIO = "salario";
     private final String TRANSPORTE = "transporte";
     private final String PENSAO_CLT = "pensao_clt";
@@ -19,14 +18,12 @@ public class InformacoesAUX {
     private final String CONTADOR = "contador";
     private final String SAUDE = "saude";
     private final String PRO_LABORE = "pro_labore";
-
     private final String NOME = "nome";
 
 
     private int id;
     private int codigoBeneficio;
     private int filho;
-
     private float salario;
     private float transporte;
     private float pensaoClt;
@@ -34,7 +31,6 @@ public class InformacoesAUX {
     private float contador;
     private float saude;
     private float proLabore;
-
     private String nome;
 
     // CONSTRUTORES
@@ -70,6 +66,8 @@ public class InformacoesAUX {
         this.proLabore = cursor.getFloat(cursor.getColumnIndex(PRO_LABORE));
 
         this.nome = cursor.getString(cursor.getColumnIndex(NOME));
+
+        this.setInformacoes();
     }
 
     // MÉTODOS
@@ -93,38 +91,21 @@ public class InformacoesAUX {
         return contentValues;
     }
 
-    // GETERES
-    public int getId() {
-        return id;
-    }
-    public int getCodigoBeneficio() {
-        return codigoBeneficio;
-    }
-    public int getFilho() {
-        return filho;
-    }
-    public float getSalario() {
-        return salario;
-    }
-    public float getTransporte() {
-        return transporte;
-    }
-    public float getPensaoClt() {
-        return pensaoClt;
-    }
-    public float getPensaoPJ() {
-        return pensaoPJ;
-    }
-    public float getContador() {
-        return contador;
-    }
-    public float getSaude() {
-        return saude;
-    }
-    public float getProLabore() {
-        return proLabore;
-    }
-    public String getNome() {
-        return nome;
+    private void setInformacoes() {
+        Informacoes informacoes = Informacoes.getInstance();
+
+        informacoes.setId(this.id);
+        informacoes.setSalario(this.salario);
+        informacoes.setTransporte(this.transporte);
+
+        informacoes.setCodigoBeneficio(this.codigoBeneficio);
+        informacoes.setFilho(this.filho);
+        informacoes.setPensaoClt(this.pensaoClt);
+        informacoes.setPensaoPJ(this.pensaoPJ);
+        informacoes.setContador(this.contador);
+        informacoes.setSaude(this.saude);
+        informacoes.setProLabore(this.proLabore);
+
+        informacoes.setNome(this.nome);
     }
 }

@@ -118,6 +118,9 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
     private void init(){
 
+        etSalario.setText(Mascaras.decimalDuasCasas(informacoes.getSalario(), true));
+        etTransporte.setText(Mascaras.decimalDuasCasas(informacoes.getTransporte(), true));
+
         tvTransporte.setText(Mascaras.decimalDuasCasas(informacoes.getDescontoTransporte(), true));
         tvInss.setText(Mascaras.decimalDuasCasas(informacoes.getInss(informacoes.getSalario()), true));
         tvIrrf.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(informacoes.getSalario()), true));

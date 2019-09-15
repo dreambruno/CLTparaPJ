@@ -155,7 +155,7 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
 
     private Float getPJBeneficios(){
 
-        float credito = informacoes.getTransporte();
+        float credito = informacoes.getTransporte() * InformacoesAdicionais.DIAS_NO_MES.getValor();
         credito += informacoes.getBeneficios(Beneficio.REFEICAO).getValor() * InformacoesAdicionais.DIAS_NO_MES.getValor();
 
         for(Beneficio item : informacoes.getBeneficios()){

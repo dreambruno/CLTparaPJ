@@ -3,8 +3,8 @@ package com.dreambrunomsn.cltparapj.classes;
 public class Beneficio {
 
     public static final int REFEICAO = 0;
-    private int cod;
 
+    private int cod;
     private String nome;
     private float valor;
     private float desconto;

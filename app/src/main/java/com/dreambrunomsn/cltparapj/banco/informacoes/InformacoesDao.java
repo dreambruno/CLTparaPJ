@@ -5,7 +5,7 @@ import com.dreambrunomsn.cltparapj.classes.Informacoes;
 
 public interface InformacoesDao {
 
-    void buscar( int id );
+    void buscar();
 
     boolean atualizar(Informacoes informacoes);
 }

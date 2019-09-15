@@ -96,7 +96,7 @@ public class FragmentPJ extends Fragment implements View.OnClickListener{
         etProlabore.setText(Mascaras.decimalDuasCasas(informacoes.getProLabore(), false));
         tvInssPj.setText(Mascaras.decimalDuasCasas(informacoes.getProLaboreINSS(informacoes.getTotalPJ()), true));
 
-        tvTransportePj.setText(Mascaras.decimalDuasCasas(informacoes.getTransporte(), true));
+        tvTransportePj.setText(Mascaras.decimalDuasCasas(informacoes.getTransporte() * InformacoesAdicionais.DIAS_NO_MES.getValor(), true));
         tvIRPF.setText(Mascaras.decimalDuasCasas(informacoes.getIRPF(informacoes.getTotalPJ()), true));
         tvSimples.setText(Mascaras.decimalDuasCasas(this.getSimples(), true));
 

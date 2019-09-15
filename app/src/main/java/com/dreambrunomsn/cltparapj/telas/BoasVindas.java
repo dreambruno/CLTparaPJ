@@ -31,23 +31,9 @@ public class BoasVindas extends AppCompatActivity {
             @Override
             public void run(){
                 // Pegando dados do banco
-
                 informacoesDao.buscar();
-                //List<ContentValues> lista = new DatabaseHelper(getBaseContext()).buscarEscala();
 
                 Intent intent = new Intent(BoasVindas.this, Dashboard.class);
-            /*
-            if(lista != null) {
-                if (lista.size() > 0) {
-                    intent.putExtra("trabalho", lista.get(0).getAsInteger("trabalho"));
-                    intent.putExtra("folga", lista.get(0).getAsInteger("folga"));
-                    intent.putExtra("reuniao", (lista.get(0).getAsInteger("reuniao") == 1));
-                    intent.putExtra("dia", lista.get(0).getAsInteger("dia"));
-                    intent.putExtra("mes", lista.get(0).getAsInteger("mes"));
-                    intent.putExtra("ano", lista.get(0).getAsInteger("ano"));
-                }// fim if size
-            }// fim if null
-            */
                 startActivity(intent);
                 finish();
             }

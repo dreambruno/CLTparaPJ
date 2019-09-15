@@ -7,11 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.dreambrunomsn.cltparapj.R;
+import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDao;
+import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDaoSqlite;
+import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.conectores.SectionsPagerAdapter;
 
 public class Dashboard extends AppCompatActivity {
+
+    private Button salvar;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -24,6 +32,17 @@ public class Dashboard extends AppCompatActivity {
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        salvar = findViewById(R.id.btSalvarDados);
+        salvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InformacoesDao informacoesDao = new InformacoesDaoSqlite(getBaseContext());
+                boolean salvo = informacoesDao.atualizar(Informacoes.getInstance());
+
+                Toast.makeText(Dashboard.this, (salvo ? "Salvo com sucesso!" : "Falha ao salvar!"), Toast.LENGTH_LONG).show();
+            }
+        });
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 

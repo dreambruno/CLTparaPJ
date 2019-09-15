@@ -1,6 +1,5 @@
 package com.dreambrunomsn.cltparapj.classes;
 
-import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesAUX;
 import com.dreambrunomsn.cltparapj.conectores.OnInformacaoChangeListener;
 import com.dreambrunomsn.cltparapj.enums.FGTS;
 import com.dreambrunomsn.cltparapj.enums.INSS;
@@ -65,22 +64,6 @@ public class Informacoes {
             ourInstance = new Informacoes();
         }
         return ourInstance;
-    }
-
-    public void setInformacoes(InformacoesAUX informacoesAUX) {
-        this.id = informacoesAUX.getId();
-        this.salario = informacoesAUX.getSalario();
-        this.transporte = informacoesAUX.getTransporte();
-
-        this.codigoBeneficio = informacoesAUX.getCodigoBeneficio();
-        this.filho = informacoesAUX.getFilho();
-        this.pensaoClt = informacoesAUX.getPensaoClt();
-        this.pensaoPJ = informacoesAUX.getPensaoPJ();
-        this.contador = informacoesAUX.getContador();
-        this.saude = informacoesAUX.getSaude();
-        this.proLabore = informacoesAUX.getProLabore();
-
-        this.nome = informacoesAUX.getNome();
     }
 
     public void addBeneficio(Beneficio beneficio){
@@ -170,7 +153,7 @@ public class Informacoes {
         return transporte;
     }
     public void setTransporte(Float transporte) {
-        this.transporte = transporte * InformacoesAdicionais.DIAS_NO_MES.getValor();
+        this.transporte = transporte;
         if(onCLTChangeListener != null)
             onCLTChangeListener.onInformacaoChange();
     }
@@ -213,11 +196,9 @@ public class Informacoes {
 
     public float getDescontoTransporte() {
         float valor = this.salario * InformacoesAdicionais.DESCONTO_TRANSPORTE.getValor();
-        if(valor > this.transporte){
-            valor = this.transporte;
-        }
+        float transporteMensal = this.transporte * InformacoesAdicionais.DIAS_NO_MES.getValor();
 
-        return valor;
+        return valor < transporteMensal ? valor : transporteMensal;
     }
 
     /**
@@ -303,7 +284,7 @@ public class Informacoes {
 
         float ferias = ( base * 1.333f ) / InformacoesAdicionais.MESES_NO_ANO.getValor();
 
-        float beneficios = this.getTransporte();
+        float beneficios = this.getTransporte() * InformacoesAdicionais.DIAS_NO_MES.getValor();
         beneficios += this.getBeneficios(Beneficio.REFEICAO).getValor() * InformacoesAdicionais.DIAS_NO_MES.getValor();
         for(Beneficio item : this.getBeneficios()){
             beneficios += item.getValor();

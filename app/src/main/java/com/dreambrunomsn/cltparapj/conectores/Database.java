@@ -1,5 +1,6 @@
 package com.dreambrunomsn.cltparapj.conectores;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -43,12 +44,15 @@ public class Database extends SQLiteOpenHelper {
 
         db.beginTransaction();
         try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("id_informacoes", "1");
+
             db.execSQL(INFORMACOES);
-            //TODO: Inserir dado inicial
+            db.insert("INFORMACOES", null, contentValues);
             Log.i("console", "Método onCreate: informações criado");
 
             db.execSQL(BENEFICIO);
-            //TODO: Inserir dado inicial
+            db.insert("BENEFICIO", null, contentValues);
             Log.i("console", "Método onCreate: beneficios criado");
 
             db.setTransactionSuccessful();
@@ -56,8 +60,6 @@ public class Database extends SQLiteOpenHelper {
             Log.e("console", "Método onCreate erro: " + ex.getMessage());
         } finally {
             db.endTransaction();
-            //db.close();
-            Log.i("console", "Método onCreate: FIM");
         }
     }
 
