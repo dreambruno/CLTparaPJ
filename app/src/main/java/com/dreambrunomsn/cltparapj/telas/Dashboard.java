@@ -16,6 +16,7 @@ import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDao;
 import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDaoSqlite;
 import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.conectores.SectionsPagerAdapter;
+import com.dreambrunomsn.cltparapj.utils.Utils;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View view) {
                 InformacoesDao informacoesDao = new InformacoesDaoSqlite(getBaseContext());
                 boolean salvo = informacoesDao.atualizar(Informacoes.getInstance());
-
+                Utils.hideKeyboard(Dashboard.this);
                 Toast.makeText(Dashboard.this, (salvo ? "Salvo com sucesso!" : "Falha ao salvar!"), Toast.LENGTH_LONG).show();
             }
         });
