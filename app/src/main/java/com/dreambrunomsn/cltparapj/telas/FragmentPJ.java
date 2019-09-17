@@ -113,7 +113,7 @@ public class FragmentPJ extends Fragment implements View.OnClickListener{
 
         float irpf = informacoes.getIRPF(informacoes.getTotalPJ());
 
-        float simples = informacoes.getTotalPJ() * InformacoesAdicionais.SIMPLES.getValor();
+        float simples = informacoes.getTotalPJ() * (informacoes.getProLabore() >= 28 ? InformacoesAdicionais.SIMPLES_06.getValor() : InformacoesAdicionais.SIMPES_15.getValor());
 
         return inss + irpf + simples;
     }

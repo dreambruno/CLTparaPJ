@@ -7,7 +7,8 @@ public enum InformacoesAdicionais {
     DIAS_NO_MES(22),
     MESES_NO_ANO(12),
     ANO_SEM_FERIAS(11),
-    SIMPLES(0.06f);
+    SIMPLES_06(0.06f),
+    SIMPES_15(0.155f);
 
     private float valor;
 
