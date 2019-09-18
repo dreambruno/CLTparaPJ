@@ -12,7 +12,7 @@ import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDaoSqlite;
 
 public class BoasVindas extends AppCompatActivity {
 
-    InformacoesDao informacoesDao;
+    private InformacoesDao informacoesDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

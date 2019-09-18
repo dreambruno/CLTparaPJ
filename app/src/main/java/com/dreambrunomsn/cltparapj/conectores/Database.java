@@ -1,6 +1,5 @@
 package com.dreambrunomsn.cltparapj.conectores;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,7 +16,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase database) {
         Log.i("console", "Método onCreate: INICIO");
 
         String INFORMACOES = "CREATE TABLE IF NOT EXISTS INFORMACOES (" +
@@ -42,29 +41,30 @@ public class Database extends SQLiteOpenHelper {
                 "    desconto       DECIMAL         DEFAULT 0" +
                 ")";
 
-        db.beginTransaction();
+        database.beginTransaction();
         try {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("id_informacoes", "1");
-
-            db.execSQL(INFORMACOES);
-            db.insert("INFORMACOES", null, contentValues);
+            database.execSQL(INFORMACOES);
             Log.i("console", "Método onCreate: informações criado");
 
-            db.execSQL(BENEFICIO);
-            db.insert("BENEFICIO", null, contentValues);
+            database.execSQL(BENEFICIO);
             Log.i("console", "Método onCreate: beneficios criado");
 
-            db.setTransactionSuccessful();
+            database.setTransactionSuccessful();
         } catch (Exception ex){
             Log.e("console", "Método onCreate erro: " + ex.getMessage());
         } finally {
-            db.endTransaction();
+            database.endTransaction();
         }
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase database, int i, int i1) {
         Log.i("console", "Método onUpgrade: INICIO");
+        try{
+            database.delete("INFORMACOES", null, null);
+            database.delete("BENEFICIO", null, null);
+        } catch (Exception ex) {
+            Log.e("console", "Método onUpgrade erro: " + ex.getMessage());
+        }
     }
 }

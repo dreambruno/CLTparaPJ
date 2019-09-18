@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.dreambrunomsn.cltparapj.R;
 import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDao;
 import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesDaoSqlite;
-import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.conectores.SectionsPagerAdapter;
 import com.dreambrunomsn.cltparapj.utils.Utils;
 
@@ -39,7 +38,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 InformacoesDao informacoesDao = new InformacoesDaoSqlite(getBaseContext());
-                boolean salvo = informacoesDao.atualizar(Informacoes.getInstance());
+                boolean salvo = informacoesDao.atualizar();
                 Utils.hideKeyboard(Dashboard.this);
                 Toast.makeText(Dashboard.this, (salvo ? "Salvo com sucesso!" : "Falha ao salvar!"), Toast.LENGTH_LONG).show();
             }

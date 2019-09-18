@@ -63,11 +63,9 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.fpSalvar:
-                this.salvar();
-                dismiss();
-                break;
+        if (view.getId() == R.id.fpSalvar) {
+            this.salvar();
+            dismiss();
         }
     }
 

@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.dreambrunomsn.cltparapj.banco.beneficio.BeneficioDao;
 import com.dreambrunomsn.cltparapj.banco.beneficio.BeneficioDaoSqlite;
-import com.dreambrunomsn.cltparapj.classes.Informacoes;
 import com.dreambrunomsn.cltparapj.conectores.Database;
 
 public class InformacoesDaoSqlite implements InformacoesDao {
@@ -40,7 +39,7 @@ public class InformacoesDaoSqlite implements InformacoesDao {
     }
 
     @Override
-    public boolean atualizar(Informacoes informacoes) {
+    public boolean atualizar() {
         try {
             database.update(TABELA, new InformacoesAUX().getContentValues(), WHERE_ID, null);
             beneficioDao.atualizar();

@@ -41,12 +41,12 @@ public class Mascaras {
                         editText.setText(Mascaras.contabil(editable.toString()));
                         break;
                     case SALARIO:
-                        Float salario = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        float salario = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setSalario(salario);
                         editText.setText(Mascaras.decimalDuasCasas(salario, true));
                         break;
                     case TRANSPORTE:
-                        Float transporte = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        float transporte = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setTransporte(transporte);
                         editText.setText(Mascaras.decimalDuasCasas(transporte, true));
                         break;
@@ -54,17 +54,17 @@ public class Mascaras {
                         editText.setText(Mascaras.decimal(editable.toString()));
                         break;
                     case CONTADOR:
-                        Float contador = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        float contador = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setContador(contador);
                         editText.setText(Mascaras.decimalDuasCasas(contador, true));
                         break;
                     case SAUDE:
-                        Float saude = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        float saude = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setSaude(saude);
                         editText.setText(Mascaras.decimalDuasCasas(saude, true));
                         break;
                     case PRO_LABORE:
-                        Float proLabore = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
+                        float proLabore = Mascaras.stringToFloat(Mascaras.contabil(editable.toString()));
                         informacoes.setProLabore(proLabore);
                         editText.setText(Mascaras.decimalDuasCasas(proLabore, true));
                         break;

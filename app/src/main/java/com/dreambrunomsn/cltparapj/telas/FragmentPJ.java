@@ -86,7 +86,7 @@ public class FragmentPJ extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void init(){
+    private void init(){
         etContador.setText(Mascaras.decimalDuasCasas(informacoes.getContador(), true));
         etSaude.setText(Mascaras.decimalDuasCasas(informacoes.getSaude(), true));
 
@@ -108,7 +108,7 @@ public class FragmentPJ extends Fragment implements View.OnClickListener{
         }
     }
 
-    public float getSimples(){
+    private float getSimples(){
         float inss = informacoes.getProLaboreINSS(informacoes.getTotalPJ());
 
         float irpf = informacoes.getIRPF(informacoes.getTotalPJ());
