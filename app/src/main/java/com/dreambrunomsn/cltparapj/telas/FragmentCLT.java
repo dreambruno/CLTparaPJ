@@ -123,7 +123,7 @@ public class FragmentCLT extends Fragment implements View.OnClickListener{
 
         tvTransporte.setText(Mascaras.decimalDuasCasas(informacoes.getDescontoTransporte(), true));
         tvInss.setText(Mascaras.decimalDuasCasas(informacoes.getInss(informacoes.getSalario()), true));
-        tvIrrf.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(informacoes.getSalario()), true));
+        tvIrrf.setText(Mascaras.decimalDuasCasas(informacoes.getIrrf(informacoes.getSalario(), informacoes.getPensaoCLTValor(informacoes.getSalario())), true));
 
         // deletar as linhas
         painelDescontos.removeAllViews();

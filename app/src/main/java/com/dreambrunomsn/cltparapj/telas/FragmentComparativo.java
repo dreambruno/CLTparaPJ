@@ -96,7 +96,7 @@ public class FragmentComparativo extends Fragment implements View.OnClickListene
     }
 
     private Float getSalarioComImposto(Float valor){
-        valor -= informacoes.getInss(valor) + informacoes.getIrrf(valor) + informacoes.getPensaoCLTValor(valor);
+        valor -= informacoes.getInss(valor) + informacoes.getIrrf(valor, informacoes.getPensaoCLTValor(valor)) + informacoes.getPensaoCLTValor(valor);
 
         return valor;
     }

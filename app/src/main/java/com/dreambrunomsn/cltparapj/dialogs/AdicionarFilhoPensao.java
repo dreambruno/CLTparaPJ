@@ -55,8 +55,8 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
         salvar = findViewById(R.id.fpSalvar);
         salvar.setOnClickListener(this);
 
-        mostrador.setText(String.valueOf(informacoes.getFilho()));
-        filho.setProgress(informacoes.getFilho());
+        mostrador.setText(String.valueOf(informacoes.getDependente()));
+        filho.setProgress(informacoes.getDependente());
         pensaoClt.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoClt(), false));
         pensaoPJ.setText(Mascaras.decimalDuasCasas(informacoes.getPensaoPJ(), false));
     }
@@ -86,7 +86,7 @@ public class AdicionarFilhoPensao extends Dialog implements View.OnClickListener
     public void onStopTrackingTouch(SeekBar seekBar) { }
 
     private void salvar(){
-        informacoes.setFilho(filho.getProgress());
+        informacoes.setDependente(filho.getProgress());
         informacoes.setPensaoClt(Mascaras.stringToFloat(pensaoClt.getText().toString()));
         informacoes.setPensaoPJ(Mascaras.stringToFloat(pensaoPJ.getText().toString()));
     }

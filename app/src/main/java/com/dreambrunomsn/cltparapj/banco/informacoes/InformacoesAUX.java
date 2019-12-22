@@ -39,7 +39,7 @@ public class InformacoesAUX {
 
         this.id = informacoes.getId();
         this.codigoBeneficio = informacoes.getCodigoBeneficio();
-        this.filho = informacoes.getFilho();
+        this.filho = informacoes.getDependente();
 
         this.salario = informacoes.getSalario();
         this.transporte = informacoes.getTransporte();
@@ -99,7 +99,7 @@ public class InformacoesAUX {
         informacoes.setTransporte(this.transporte);
 
         informacoes.setCodigoBeneficio(this.codigoBeneficio);
-        informacoes.setFilho(this.filho);
+        informacoes.setDependente(this.filho);
         informacoes.setPensaoClt(this.pensaoClt);
         informacoes.setPensaoPJ(this.pensaoPJ);
         informacoes.setContador(this.contador);

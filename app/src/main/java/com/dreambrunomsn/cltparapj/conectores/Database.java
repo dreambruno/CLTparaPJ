@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesAUX;
+
 public class Database extends SQLiteOpenHelper {
 
     private static final String BANCO_NOME = "CLTparaPJ2019";
@@ -45,6 +47,9 @@ public class Database extends SQLiteOpenHelper {
         try {
             database.execSQL(INFORMACOES);
             Log.i("console", "Método onCreate: informações criado");
+
+            long id = database.insert("INFORMACOES", null, new InformacoesAUX().getContentValues());
+            Log.i("console", "Método onCreate: base informações inserido id " + id);
 
             database.execSQL(BENEFICIO);
             Log.i("console", "Método onCreate: beneficios criado");

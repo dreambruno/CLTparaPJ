@@ -18,7 +18,7 @@ public class Informacoes {
 
     private int id;
     private int codigoBeneficio;
-    private int filho;
+    private int dependente;
 
     private float salario;
     private float transporte;
@@ -43,7 +43,7 @@ public class Informacoes {
         this.transporte = 0;
         this.codigoBeneficio = 0;
         this.beneficios = new HashMap<>();
-        this.filho = 0;
+        this.dependente = 0;
         this.pensaoClt = 0;
         this.pensaoPJ = 0;
         this.contador = 1000;
@@ -109,11 +109,11 @@ public class Informacoes {
         this.codigoBeneficio = codigoBeneficio;
     }
 
-    public int getFilho() {
-        return filho;
+    public int getDependente() {
+        return dependente;
     }
-    public void setFilho(int filho) {
-        this.filho = filho;
+    public void setDependente(int dependente) {
+        this.dependente = dependente;
         if(onCLTChangeListener != null)
             onCLTChangeListener.onInformacaoChange();
     }
@@ -228,21 +228,22 @@ public class Informacoes {
         }
     }
 
-    public float getPensaoCLTValor(Float salario){
+    public float getPensaoCLTValor(float salario){
         float valor = salario - this.getInss(salario);
+        valor = valor - this.getIrrf(salario, 0);
 
-        return valor * (this.pensaoClt / 100);
+        return valor * (pensaoClt / 100);
     }
 
     public float getPensaoPJValor(){
 
-        return InformacoesAdicionais.SALARIO_MINIMO.getValor() * (this.pensaoPJ / 100);
+        return InformacoesAdicionais.SALARIO_MINIMO.getValor() * (pensaoPJ / 100);
     }
 
-    public float getIrrf(Float salario){
+    public float getIrrf(float salario, float pensao){
         float valorBase = salario - this.getInss(salario);
-        valorBase -= filho * IRRF.BASE_DEPENDENTE;
-        valorBase -= this.getPensaoCLTValor(salario);
+        valorBase -= dependente * IRRF.BASE_DEPENDENTE;
+        valorBase -= pensao;
 
         IRRF irrf = IRRF.getIRRF(valorBase);
 
@@ -304,7 +305,7 @@ public class Informacoes {
     public float getIRPF(float sal){
         float valorBase = sal * (this.getProLabore() / 100);
         valorBase = valorBase - this.getInss(valorBase);
-        valorBase -= filho * IRRF.BASE_DEPENDENTE;
+        valorBase -= dependente * IRRF.BASE_DEPENDENTE;
         valorBase -= this.getPensaoPJValor();
 
         IRRF irrf = IRRF.getIRRF(valorBase);
