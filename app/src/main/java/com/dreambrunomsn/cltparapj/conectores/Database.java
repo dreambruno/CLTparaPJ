@@ -10,7 +10,7 @@ import com.dreambrunomsn.cltparapj.banco.informacoes.InformacoesAUX;
 public class Database extends SQLiteOpenHelper {
 
     private static final String BANCO_NOME = "CLTparaPJ2019";
-    private static final int BANCO_VERSAO = 1;
+    private static final int BANCO_VERSAO = 3; // Atualizado em 22/12/2019
 
     public Database(Context context) {
         super(context, BANCO_NOME, null, BANCO_VERSAO);
@@ -63,11 +63,13 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase database, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase database, int i, int i1) { // Atualizado para banco #3
         Log.i("console", "Método onUpgrade: INICIO");
         try{
             database.delete("INFORMACOES", null, null);
             database.delete("BENEFICIO", null, null);
+
+            this.onCreate(database);
         } catch (Exception ex) {
             Log.e("console", "Método onUpgrade erro: " + ex.getMessage());
         }
